@@ -14,6 +14,10 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 @NgModule({
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     FormsModule,
@@ -22,11 +26,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     NavbarModule,
     FooterModule,
     SidebarModule,
-    AppRoutingModule
-  ],
-  declarations: [
-    AppComponent,
-    AdminLayoutComponent
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
