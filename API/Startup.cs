@@ -1,11 +1,9 @@
-using Domain.DataContext;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace API
 {
@@ -21,17 +19,10 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<JFContext>(options =>
-            {
-                options.UseSqlServer(_config.GetConnectionString("JurnalulFermieruluiConnString"), x => x.MigrationsAssembly("Domain"));
-            });
-
+            services.AddAplicationServices(_config);
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-            });
             services.AddCors();
+            services.AddIdentityServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,9 +39,12 @@ namespace API
 
             app.UseRouting();
 
-            app.UseCors(policy => policy.AllowAnyHeader()
+            app.UseCors(policy => policy
+                .AllowAnyHeader()
                 .AllowAnyMethod()
-                .WithOrigins("https://localhost:4200"));
+                .WithOrigins(_config.GetSection("HostName").Value));
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
