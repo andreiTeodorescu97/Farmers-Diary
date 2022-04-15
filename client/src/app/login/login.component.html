@@ -1,0 +1,45 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        <div class="card">
+          <div class="header text-center">
+            <h4 class="title">Login</h4>
+            <p class="category">
+              Nu ai cont? <a href="#"> Inregistreaza-te! </a>
+            </p>
+            <br />
+          </div>
+          <div class="content">
+            <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="form-group">
+                    <label>Nume utilizator</label>
+                    <input
+                      name="username"
+                      [(ngModel)]="loginModel.username"
+                      class="form-control"
+                      placeholder="Nume utilizator"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Parola</label>
+                    <input
+                      type="password"
+                      name="password"
+                      [(ngModel)]="loginModel.password"
+                      class="form-control"
+                      placeholder="Parola"
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-info btn-fill pull-right">Login</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

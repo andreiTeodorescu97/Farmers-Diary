@@ -9,8 +9,7 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-layout',
-  templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.scss']
+  templateUrl: './admin-layout.component.html'
 })
 export class AdminLayoutComponent implements OnInit {
   private _router: Subscription;
@@ -60,14 +59,14 @@ export class AdminLayoutComponent implements OnInit {
   ngAfterViewInit() {
       this.runOnRouteChange();
   }
-  isMap(path){
+  isRoute(path){
       var titlee = this.location.prepareExternalUrl(this.location.path());
-      titlee = titlee.slice( 1 );
+      titlee = titlee.slice(2);
       if(path == titlee){
-          return false;
+          return true;
       }
       else {
-          return true;
+          return false;
       }
   }
   runOnRouteChange(): void {

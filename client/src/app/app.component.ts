@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
+import { User } from './_models/user/user';
+import { AccountService } from './_services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,15 @@ import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 })
 export class AppComponent implements OnInit {
 
-     constructor(public location: Location) {}
+     constructor(public location: Location, private accountService: AccountService) {}
 
     ngOnInit(){
+      this.setCurrentUser();
+    }
+
+    setCurrentUser(){
+      const user : User = JSON.parse(localStorage.getItem('user'));
+      this.accountService.setCurrentUser(user);
     }
 
     isMap(path){

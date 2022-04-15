@@ -43,10 +43,10 @@
                 </li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" *ngIf="(accountService.currentUser$ | async) as user">
                 <li>
                     <a href="#">
-                        Account
+                        Bine ai venit, <strong>{{user.username}}</strong>!
                     </a>
                 </li>
                 <li class="dropdown">
@@ -67,9 +67,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
-                        Log out
-                    </a>
+                    <a role="button" (click)="logout()">Logout</a>
                 </li>
                 <li class="separator hidden-lg hidden-md"></li>
             </ul>
