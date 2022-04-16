@@ -11,14 +11,36 @@ import { SidebarModule } from './sidebar/sidebar.module';
 
 import { AppComponent } from './app.component';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { HomeComponent } from './home/home.component';
+import { IconsComponent } from './icons/icons.component';
+import { LoginComponent } from './login/login.component';
+import { MapsComponent } from './maps/maps.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { TablesComponent } from './tables/tables.component';
+import { TypographyComponent } from './typography/typography.component';
+import { UpgradeComponent } from './upgrade/upgrade.component';
+import { UserComponent } from './user/user.component';
+import { LbdModule } from './lbd/lbd.module';
+import { CommonModule } from '@angular/common';
+import { ShellComponent } from './shell/shell.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    HomeComponent,
+    UserComponent,
+    TablesComponent,
+    TypographyComponent,
+    IconsComponent,
+    MapsComponent,
+    NotificationsComponent,
+    UpgradeComponent,
+    LoginComponent,
+    ShellComponent
   ],
   imports: [
+    CommonModule,
+    LbdModule,
     BrowserAnimationsModule,
     FormsModule,
     RouterModule,

@@ -1,26 +1,42 @@
-import { NgModule } from '@angular/core';
-import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { BrowserModule } from "@angular/platform-browser";
+import { Routes, RouterModule } from "@angular/router";
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { HomeComponent } from "./home/home.component";
+import { IconsComponent } from "./icons/icons.component";
+import { LoginComponent } from "./login/login.component";
+import { MapsComponent } from "./maps/maps.component";
+import { NotificationsComponent } from "./notifications/notifications.component";
+import { TablesComponent } from "./tables/tables.component";
+import { TypographyComponent } from "./typography/typography.component";
+import { UpgradeComponent } from "./upgrade/upgrade.component";
+import { UserComponent } from "./user/user.component";
+import { ShellComponent } from "./shell/shell.component";
 
-const routes: Routes =[
+const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  }, {
-    path: '',
-    component: AdminLayoutComponent,
+    path: "",
+    component: ShellComponent,
     children: [
-        {
-      path: '',
-      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  }]},
+      { path: "dashboard", component: HomeComponent },
+      { path: "user", component: UserComponent },
+      { path: "table", component: TablesComponent },
+      { path: "typography", component: TypographyComponent },
+      { path: "icons", component: IconsComponent },
+      { path: "maps", component: MapsComponent },
+      { path: "notifications", component: NotificationsComponent },
+      { path: "upgrade", component: UpgradeComponent },
+    ],
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: '/login',
+    pathMatch: 'full'
   }
 ];
 
@@ -28,11 +44,10 @@ const routes: Routes =[
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
-       useHash: true
-    })
+    RouterModule.forRoot(routes, {
+      useHash: true,
+    }),
   ],
-  exports: [
-  ],
+  exports: [],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
