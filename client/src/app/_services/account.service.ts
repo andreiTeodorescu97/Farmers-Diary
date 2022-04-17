@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { RegisterUser } from "app/_models/user/registerUser";
 import { User } from "app/_models/user/user";
 import { Observable, ReplaySubject } from "rxjs";
 import { map } from "rxjs/operators";
@@ -24,6 +25,10 @@ export class AccountService {
         }
       })
     );
+  }
+
+  register(model: RegisterUser){
+    return this.http.post(this.baseUrl + "account/register", model);
   }
 
   setCurrentUser(user: User){

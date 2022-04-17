@@ -24,7 +24,7 @@ import { LbdModule } from './lbd/lbd.module';
 import { CommonModule } from '@angular/common';
 import { ShellComponent } from './shell/shell.component';
 import { RegisterComponent } from './register/register.component';
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +51,8 @@ import { RegisterComponent } from './register/register.component';
     FooterModule,
     SidebarModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

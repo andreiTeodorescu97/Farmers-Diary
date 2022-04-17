@@ -33,6 +33,7 @@
         "googleapis": "66.0.0",
         "jquery": "3.5.1",
         "mdb-ui-kit": "^3.11.0",
+        "ngx-toastr": "^13.2.1",
         "perfect-scrollbar": "1.5.0",
         "rxjs": "6.6.3",
         "rxjs-compat": "6.6.3",
