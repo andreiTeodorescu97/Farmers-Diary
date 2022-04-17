@@ -23,6 +23,7 @@ import { UserComponent } from './user/user.component';
 import { LbdModule } from './lbd/lbd.module';
 import { CommonModule } from '@angular/common';
 import { ShellComponent } from './shell/shell.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ShellComponent } from './shell/shell.component';
     NotificationsComponent,
     UpgradeComponent,
     LoginComponent,
-    ShellComponent
+    ShellComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

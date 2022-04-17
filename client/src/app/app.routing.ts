@@ -13,6 +13,7 @@ import { TypographyComponent } from "./typography/typography.component";
 import { UpgradeComponent } from "./upgrade/upgrade.component";
 import { UserComponent } from "./user/user.component";
 import { ShellComponent } from "./shell/shell.component";
+import { RegisterComponent } from "./register/register.component";
 
 const routes: Routes = [
   {
@@ -30,14 +31,22 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: "",
+    component: LoginComponent,
   },
   {
-    path: '**',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  }
+    path: "login",
+    component: LoginComponent,
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
+  },
+  {
+    path: "**",
+    redirectTo: "/login",
+    pathMatch: "full",
+  },
 ];
 
 @NgModule({
