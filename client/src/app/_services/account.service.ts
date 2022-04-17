@@ -20,24 +20,23 @@ export class AccountService {
       map((response: User) => {
         const user = response;
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem("user", JSON.stringify(user));
           this.currentUserSource.next(user);
         }
       })
     );
   }
 
-  register(model: RegisterUser){
+  register(model: RegisterUser) {
     return this.http.post(this.baseUrl + "account/register", model);
   }
 
-  setCurrentUser(user: User){
+  setCurrentUser(user: User) {
     this.currentUserSource.next(user);
   }
 
-  logout()
-  {
-    localStorage.removeItem('user');
+  logout() {
+    localStorage.removeItem("user");
     this.currentUserSource.next(null);
   }
 }

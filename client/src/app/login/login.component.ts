@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AccountService } from "app/_services/account.service";
-import * as mdb from 'mdb-ui-kit';
+import * as mdb from "mdb-ui-kit";
 
 @Component({
   selector: "app-login",
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     this.accountService.login(this.loginModel).subscribe(
       (respone) => {
         console.log(respone);
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl("/dashboard");
       },
       (error) => {
         console.log(error);

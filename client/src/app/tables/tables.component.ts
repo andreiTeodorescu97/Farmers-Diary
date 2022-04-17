@@ -19,8 +19,8 @@ export class TablesComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-      this.getUsers();
-      
+    this.getUsers();
+
     this.tableData1 = {
       headerRow: ["ID", "Name", "Country", "City", "Salary"],
       dataRows: [
@@ -45,7 +45,7 @@ export class TablesComponent implements OnInit {
     };
   }
 
-  getUsers(){
+  getUsers() {
     this.http.get("https://localhost:5001/api/users").subscribe(
       (response) => {
         this.users = response;
