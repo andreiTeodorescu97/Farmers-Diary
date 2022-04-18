@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { AccountService } from "app/_services/account.service";
 import * as mdb from "mdb-ui-kit";
@@ -10,6 +10,8 @@ import * as mdb from "mdb-ui-kit";
 })
 export class LoginComponent implements OnInit {
   loginModel: any = {};
+  @ViewChild("myPassword") myPass: any;
+  type: string = "password";
 
   constructor(private accountService: AccountService, private router: Router) {}
 
@@ -25,5 +27,14 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onShowPassword() {
+    if (this.type === "password") {
+      this.type = "text";
+    } else {
+      this.type = "password";
+    }
+    this.myPass.nativeElement.type = this.type;
   }
 }
