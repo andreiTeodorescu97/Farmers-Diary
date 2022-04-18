@@ -84,6 +84,11 @@
                   <label class="form-control-placeholder" for="password"
                     >Parola</label
                   >
+                  <span
+                    toggle="#password-field"
+                    class="fa fa-fw fa-eye field-icon toggle-password clickable eye-icon"
+                    (click)="onShowPassword()"
+                  ></span>
                 </div>
                 <div class="form-group col-md-6">
                   <input
@@ -92,10 +97,16 @@
                     name="repeatPassword"
                     [(ngModel)]="registerModel.confirmPassword"
                     required
+                    #myPasswordRepeat
                   />
                   <label class="form-control-placeholder" for="password"
                     >Repeta parola</label
                   >
+                  <span
+                    toggle="#password-field"
+                    class="fa fa-fw fa-eye field-icon toggle-password clickable eye-icon"
+                    (click)="onShowPasswordRepeat()"
+                  ></span>
                 </div>
 
                 <div class="form-group">

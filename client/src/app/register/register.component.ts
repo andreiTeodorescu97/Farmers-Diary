@@ -12,6 +12,10 @@ import { ToastrService } from "ngx-toastr";
 })
 export class RegisterComponent implements OnInit {
   registerModel = {} as RegisterUser;
+  @ViewChild("myPassword") myPass: any;
+  typePass: string = "password";
+  @ViewChild("myPasswordRepeat") myPassRep: any;
+  typePassRep: string = "password";
 
   constructor(
     private accountService: AccountService,
@@ -31,5 +35,23 @@ export class RegisterComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onShowPassword() {
+    if (this.typePass === "password") {
+      this.typePass = "text";
+    } else {
+      this.typePass = "password";
+    }
+    this.myPass.nativeElement.type = this.typePass;
+  }
+
+  onShowPasswordRepeat() {
+    if (this.typePassRep === "password") {
+      this.typePassRep = "text";
+    } else {
+      this.typePassRep = "password";
+    }
+    this.myPassRep.nativeElement.type = this.typePassRep;
   }
 }
