@@ -10932,3 +10932,7 @@ h5,
 .no-scroll {
   overflow-y: hidden;
 }
+
+.clickable {
+  cursor: pointer;
+}

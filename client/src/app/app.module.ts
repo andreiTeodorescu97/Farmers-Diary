@@ -25,7 +25,6 @@ import { CommonModule } from "@angular/common";
 import { ShellComponent } from "./shell/shell.component";
 import { RegisterComponent } from "./register/register.component";
 import { ToastrModule } from "ngx-toastr";
-import { ViewPasswordDirective } from "./shared/view-password.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +39,6 @@ import { ViewPasswordDirective } from "./shared/view-password.directive";
     LoginComponent,
     ShellComponent,
     RegisterComponent,
-    ViewPasswordDirective,
   ],
   imports: [
     CommonModule,
