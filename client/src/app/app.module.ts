@@ -25,6 +25,8 @@ import { CommonModule } from "@angular/common";
 import { ShellComponent } from "./shell/shell.component";
 import { RegisterComponent } from "./register/register.component";
 import { ToastrModule } from "ngx-toastr";
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +55,7 @@ import { ToastrModule } from "ngx-toastr";
     AppRoutingModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

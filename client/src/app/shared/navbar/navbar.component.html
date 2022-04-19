@@ -46,7 +46,7 @@
             <ul class="nav navbar-nav navbar-right" *ngIf="(accountService.currentUser$ | async) as user">
                 <li>
                     <a href="#">
-                        Bine ai venit, <strong>{{user.username}}</strong>!
+                        Bine ai venit, <strong>{{user.name}} {{user.lastName}}</strong>!
                     </a>
                 </li>
                 <li class="dropdown">

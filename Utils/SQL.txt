@@ -1,0 +1,55 @@
+USE [JurnalulFermieruluiDev]
+GO
+DBCC CHECKIDENT ('[Counties]', RESEED, 0);
+GO
+DBCC CHECKIDENT ('[Cultures]', RESEED, 0);
+GO
+INSERT INTO [dbo].[Counties] ([Name])VALUES 
+(N'Bacău'),
+(N'Dolj'),
+(N'Harghita'),
+(N'Bistrița-Năsăud'),
+(N'Dâmbovița'),
+(N'Suceava'),
+(N'Botoșani'),
+(N'Brașov'),
+(N'București'),
+(N'Brăila'),
+(N'Hunedoara'),
+(N'Teleorman'),
+(N'Covasna'),
+(N'Tulcea'),
+(N'Timiș'),
+(N'Buzău'),
+(N'Prahova'),
+(N'Ilfov'),
+(N'Neamț'),
+(N'Cluj'),
+(N'Alba'),
+(N'Giurgiu'),
+(N'Argeș'),
+(N'Călărași'),
+(N'Bihor'),
+(N'Iași'),
+(N'Vâlcea'),
+(N'Vrancea'),
+(N'Arad'),
+(N'Ialomița'),
+(N'Caraș-Severin'),
+(N'Galați'),
+(N'Gorj'),
+(N'Constanța'),
+(N'Satu Mare'),
+(N'Maramureș'),
+(N'Mehedinți'),
+(N'Sălaj'),
+(N'Vaslui'),
+(N'Mureș'),
+(N'Sibiu'),
+(N'Olt');
+GO
+INSERT INTO [dbo].[Cultures] ([Name]) VALUES 
+(N'Porumb'),
+(N'Grâu');
+GO
+

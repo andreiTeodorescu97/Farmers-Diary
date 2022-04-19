@@ -11,9 +11,11 @@ namespace Infrastructure.Extensions
         public static IServiceCollection AddAplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ITokenService, TokenService>();
+
             services.AddDbContext<JFContext>(options =>
             {
-                options.UseSqlServer(config.GetConnectionString("JurnalulFermieruluiConnString"), x => x.MigrationsAssembly("Domain"));
+                options.UseSqlServer(config.GetConnectionString("JurnalulFermieruluiConnString"), 
+                    x => x.MigrationsAssembly("Domain")).UseLazyLoadingProxies();
             });
 
             return services;

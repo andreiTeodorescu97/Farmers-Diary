@@ -1,4 +1,5 @@
 ﻿using Application.Authentication.DTOs;
+using AutoMapper;
 using Domain.DataContext;
 using Domain.Entities;
 using Infrastructure.Services;
@@ -12,12 +13,10 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly JFContext _context;
         private readonly ITokenService _tokenService;
-        public AccountController(JFContext context, ITokenService tokenService)
+        public AccountController(JFContext context, IMapper mapper, ITokenService tokenService) : base(context, mapper)
         {
             _tokenService = tokenService;
-            _context = context;
         }
 
         [HttpPost("register")]
@@ -25,7 +24,7 @@ namespace API.Controllers
         {
             if (await UserExists(registerDto.Username)) return BadRequest("Numele de utilizator exista deja in baza de date!");
             if (await UserExists(registerDto.Email)) return BadRequest("Email-ul exista deja in baza de date!");
-            if(registerDto.Password != registerDto.ConfirmPassword ) return BadRequest("Parolele nu sunt la fel!");
+            if (registerDto.Password != registerDto.ConfirmPassword) return BadRequest("Parolele nu sunt la fel!");
 
             using var hmac = new HMACSHA512();
 
@@ -69,7 +68,9 @@ namespace API.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                Name = user.Name,
+                LastName = user.LastName
             };
         }
 
