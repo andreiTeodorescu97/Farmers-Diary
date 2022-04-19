@@ -7,11 +7,29 @@ import { ToastrService } from "ngx-toastr";
 export class NotificationsService {
   constructor(private toastr: ToastrService) {}
 
-  showSuccess(string) {
+  showSuccess(message) {
     this.toastr.success(
-      '<div class="alert alert-info" data-notify="container"><button type="button" aria-hidden="true" class="close">×</button> <span data-notify="icon" class="pe-7s-bell"></span><span data-notify="message">This is a notification with close button and icon.</span></div>'
+      `${message}`,
+      "",
+      {
+        timeOut: 4000,
+        closeButton: true,
+        enableHtml: true,
+        positionClass: "toast-top-right" 
+      }
     );
   }
 
-  showError(string) {}
+  showError(message) {
+    this.toastr.error(
+      `${message}`,
+      "",
+      {
+        timeOut: 4000,
+        closeButton: true,
+        enableHtml: true,
+        positionClass: "toast-top-right" 
+      }
+    );
+  }
 }

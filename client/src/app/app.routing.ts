@@ -14,6 +14,7 @@ import { UpgradeComponent } from "./upgrade/upgrade.component";
 import { UserComponent } from "./user/user.component";
 import { ShellComponent } from "./shell/shell.component";
 import { RegisterComponent } from "./register/register.component";
+import { FarmComponent } from "./farm/farm.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: "maps", component: MapsComponent },
       { path: "notifications", component: NotificationsComponent },
       { path: "upgrade", component: UpgradeComponent },
+      { path: "farm", component: FarmComponent },
     ],
   },
   {

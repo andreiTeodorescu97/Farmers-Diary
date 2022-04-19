@@ -26,6 +26,7 @@ import { ShellComponent } from "./shell/shell.component";
 import { RegisterComponent } from "./register/register.component";
 import { ToastrModule } from "ngx-toastr";
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FarmComponent } from './farm/farm.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     LoginComponent,
     ShellComponent,
     RegisterComponent,
+    FarmComponent,
   ],
   imports: [
     CommonModule,

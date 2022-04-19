@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { RegisterUser } from "app/_models/user/registerUser";
 import { AccountService } from "app/_services/account.service";
+import { NotificationsService } from "app/_services/notifications.service";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private router: Router,
-    private toastr: ToastrService
+    private notificationService: NotificationsService
   ) {}
 
   ngOnInit(): void {}
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnInit {
   register() {
     this.accountService.register(this.registerModel).subscribe(
       (respone) => {
-        this.toastr.success("Contul a fost creat cu success!");
+        this.notificationService.showSuccess("Contul a fost creat cu success!");
         this.router.navigateByUrl("/login");
       },
       (error) => {

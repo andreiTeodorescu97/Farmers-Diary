@@ -31,6 +31,7 @@ export const ROUTES: RouteInfo[] = [
     icon: "pe-7s-rocket",
     class: "active-pro",
   },
+  { path: "/farm", title: "Ferma Ta", icon: "pe-7s-sun", class: "" },
 ];
 
 @Component({
