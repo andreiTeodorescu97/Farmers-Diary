@@ -15,11 +15,16 @@ import { UserComponent } from "./user/user.component";
 import { ShellComponent } from "./shell/shell.component";
 import { RegisterComponent } from "./register/register.component";
 import { FarmComponent } from "./farm/farm.component";
+import { IsAuthenticated } from "./_guards/isauthenticated.guard";
+import { IsNotAuthenticated } from "./_guards/isnotauthenticated.guard";
+
 
 const routes: Routes = [
   {
     path: "",
     component: ShellComponent,
+    runGuardsAndResolvers:'always',
+    canActivate: [IsAuthenticated],
     children: [
       { path: "dashboard", component: HomeComponent },
       { path: "user", component: UserComponent },
@@ -35,19 +40,23 @@ const routes: Routes = [
   {
     path: "",
     component: LoginComponent,
+    canActivate: [IsNotAuthenticated]
   },
   {
     path: "login",
     component: LoginComponent,
+    canActivate: [IsNotAuthenticated]
   },
   {
     path: "register",
     component: RegisterComponent,
+    canActivate: [IsNotAuthenticated]
   },
   {
     path: "**",
     redirectTo: "/login",
     pathMatch: "full",
+    canActivate: [IsNotAuthenticated]
   },
 ];
 

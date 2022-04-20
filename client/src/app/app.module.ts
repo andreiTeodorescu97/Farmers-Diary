@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 
 import { AppRoutingModule } from "./app.routing";
@@ -25,8 +25,9 @@ import { CommonModule } from "@angular/common";
 import { ShellComponent } from "./shell/shell.component";
 import { RegisterComponent } from "./register/register.component";
 import { ToastrModule } from "ngx-toastr";
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { FarmComponent } from './farm/farm.component';
+import { ModalModule } from "ngx-bootstrap/modal";
+import { FarmComponent } from "./farm/farm.component";
+import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -57,9 +58,11 @@ import { FarmComponent } from './farm/farm.component';
     AppRoutingModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

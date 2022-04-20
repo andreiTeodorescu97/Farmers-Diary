@@ -15,7 +15,7 @@ namespace API.Controllers
         public UsersController(JFContext context, IMapper mapper) : base(context, mapper) { }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
