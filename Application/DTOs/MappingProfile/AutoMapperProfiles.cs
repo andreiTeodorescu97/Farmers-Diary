@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Collections;
+using Application.DTOs.Farm;
 using AutoMapper;
 using Domain.Entities;
 
@@ -10,6 +11,9 @@ namespace Application.DTOs.MappingProfile
         {
             CreateMap<County, CountyDTO>();
             CreateMap<Culture, CultureDTO>();
+            CreateMap<AddParcelDTO, Parcel>();
+            CreateMap<Parcel, AddParcelDTO>();
+            CreateMap<EditParcelDTO, Parcel>();
         }
     }
 }
