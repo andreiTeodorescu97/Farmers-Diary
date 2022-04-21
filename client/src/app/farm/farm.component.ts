@@ -36,6 +36,10 @@ export class FarmComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  closeParcelModal() {
+    this.modalRef.hide();
+  }
+
   onGetCultures() {
     this.collectionService
       .getCultures()
@@ -74,14 +78,6 @@ export class FarmComponent implements OnInit {
       });
   }
 
-  // la  fiecare schimbare, eventul se schimba -- momentan e.target.value e number pentru ca am pus culture.id, daca vrem string-ul cu cultura ne trebuie culture.cultureName
-  // setCulture(e) {
-  //   console.log(e.target.value);
-  //   let result = this.loadedCultures.find((elem) => {
-  //     return elem.id == e.target.value;
-  //   });
-  // }
-
   onAddParcel() {
     this.registerParcel.countyId = +this.registerParcel.countyId;
     this.registerParcel.cultureId = +this.registerParcel.cultureId;
@@ -93,5 +89,6 @@ export class FarmComponent implements OnInit {
         console.log(error);
       }
     );
+    this.modalRef.hide();
   }
 }
