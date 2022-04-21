@@ -1,1 +1,106 @@
-<p>farm works!</p>
+<button
+  type="button"
+  class="btn btn-primary"
+  (click)="addParcelModal(template)"
+>
+  Adauga parcela
+</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title text-center">ADAUGA PARCELA</h4>
+    <form>
+      <div class="form-group row">
+        <label for="parcelName" class="col-sm-3 col-form-label"
+          >Denumire parcela:</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="parcelName"
+            value=""
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="button-pick-culture" class="col-sm-3 col-form-label"
+          >Cultura:</label
+        >
+        <div class="btn-group" dropdown>
+          <button
+            id="button-pick-culture"
+            dropdownToggle
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-culture"
+          >
+            --Cultura-- <span class="caret"></span>
+          </button>
+          <ul
+            id="dropdown-culture"
+            *dropdownMenu
+            class="dropdown-menu"
+            role="menu"
+            aria-labelledby="button-pick-culture"
+          >
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Cultura 0</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Cultura 1</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Cultura 2</a>
+            </li>
+            <!-- <li class="divider dropdown-divider"></li> -->
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Cultura 3</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="button-pick-county" class="col-sm-3 col-form-label"
+          >Cultura:</label
+        >
+        <div class="btn-group" dropdown>
+          <button
+            id="button-pick-county"
+            dropdownToggle
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-county"
+          >
+            --Judet-- <span class="caret"></span>
+          </button>
+          <ul
+            id="dropdown-county"
+            *dropdownMenu
+            class="dropdown-menu"
+            role="menu"
+            aria-labelledby="button-pick-county"
+          >
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Judet 1</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Judet 2</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">Judet 3</a>
+            </li>
+            <!-- <li class="divider dropdown-divider"></li> -->
+            <li role="menuitem">
+              <a class="dropdown-item" href="#">judet 4</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<button (click)="onGetCultures()">Arata culturi</button>

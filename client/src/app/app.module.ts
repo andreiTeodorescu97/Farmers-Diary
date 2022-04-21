@@ -28,6 +28,7 @@ import { ToastrModule } from "ngx-toastr";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { FarmComponent } from "./farm/farm.component";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
     HttpClientModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
