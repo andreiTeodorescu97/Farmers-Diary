@@ -1,4 +1,4 @@
-export interface AddParcel {
+export class AddParcel {
   name: string;
   surface: number;
   cultureId: number;

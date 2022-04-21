@@ -1,4 +1,5 @@
 export interface Culture {
   id: number;
-  cultureName: string;
+  type: string;
+  name: string;
 }

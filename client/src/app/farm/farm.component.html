@@ -9,7 +9,7 @@
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title text-center">ADAUGA PARCELA</h4>
-    <form>
+    <form #registerForm="ngForm" (ngSubmit)="onAddParcel()">
       <div class="form-group row">
         <label for="parcelName" class="col-sm-3 col-form-label"
           >Denumire parcela:</label
@@ -17,90 +17,71 @@
         <div class="col-sm-9">
           <input
             type="text"
+            name="parcel-name"
             class="form-control form-control-lg"
-            id="parcelName"
-            value=""
+            id="parcel-name"
+            [(ngModel)]="registerParcel.name"
           />
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="button-pick-culture" class="col-sm-3 col-form-label"
-          >Cultura:</label
+        <label for="parcelArea" class="col-sm-3 col-form-label"
+          >Arie parcela (ha):</label
         >
-        <div class="btn-group" dropdown>
-          <button
-            id="button-pick-culture"
-            dropdownToggle
-            type="button"
-            class="btn btn-primary dropdown-toggle"
-            aria-controls="dropdown-culture"
-          >
-            --Cultura-- <span class="caret"></span>
-          </button>
-          <ul
-            id="dropdown-culture"
-            *dropdownMenu
-            class="dropdown-menu"
-            role="menu"
-            aria-labelledby="button-pick-culture"
-          >
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">Cultura 0</a>
-            </li>
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">Cultura 1</a>
-            </li>
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">Cultura 2</a>
-            </li>
-            <!-- <li class="divider dropdown-divider"></li> -->
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">Cultura 3</a>
-            </li>
-          </ul>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            name="parcel-area"
+            class="form-control form-control-lg"
+            id="parcel-area"
+            [(ngModel)]="registerParcel.surface"
+          />
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="button-pick-county" class="col-sm-3 col-form-label"
+        <label for="select-culture" class="col-sm-3 col-form-label"
           >Cultura:</label
         >
-        <div class="btn-group" dropdown>
-          <button
-            id="button-pick-county"
-            dropdownToggle
-            type="button"
-            class="btn btn-primary dropdown-toggle"
-            aria-controls="dropdown-county"
+        <select
+          class="col-sm-9"
+          id="select-culture"
+          name="select-culture"
+          aria-label="Selectati cultura"
+          placeholder="Selectati Cultura"
+          [(ngModel)]="+registerParcel.cultureId"
+        >
+          <option
+            *ngFor="let pickedCulture of loadedCultures"
+            [value]="pickedCulture.id"
           >
-            --Judet-- <span class="caret"></span>
-          </button>
-          <ul
-            id="dropdown-county"
-            *dropdownMenu
-            class="dropdown-menu"
-            role="menu"
-            aria-labelledby="button-pick-county"
-          >
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">Judet 1</a>
-            </li>
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">Judet 2</a>
-            </li>
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">Judet 3</a>
-            </li>
-            <!-- <li class="divider dropdown-divider"></li> -->
-            <li role="menuitem">
-              <a class="dropdown-item" href="#">judet 4</a>
-            </li>
-          </ul>
-        </div>
+            {{ pickedCulture.name }}
+          </option>
+        </select>
       </div>
+
+      <div class="form-group row">
+        <label for="select-county" class="col-sm-3 col-form-label"
+          >Judet:</label
+        >
+        <select
+          class="col-sm-9"
+          name="select-county"
+          id="select-county"
+          aria-label="Selectati judetul"
+          placeholder="Selectati Judetul"
+          [(ngModel)]="+registerParcel.countyId"
+        >
+          <option
+            *ngFor="let pickedCounty of loadedCounties"
+            [value]="pickedCounty.id"
+          >
+            {{ pickedCounty.name }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Salveaza Parcela</button>
     </form>
   </div>
 </ng-template>
-
-<button (click)="onGetCultures()">Arata culturi</button>
