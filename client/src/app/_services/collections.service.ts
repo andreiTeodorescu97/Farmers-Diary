@@ -1,18 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CollectionsService {
-  baseUrl = "https://localhost:5001/api/";
+
+  url = environment.apiUrl + "collections/";
+
   constructor(private http: HttpClient) { }
 
   getCultures(){
-    return this.http.get(this.baseUrl + "collections/cultures");
+    return this.http.get(this.url + "cultures");
   }
 
   getCounties(){
-    return this.http.get(this.baseUrl + "collections/counties");
+    return this.http.get(this.url + "counties");
   }
 }
