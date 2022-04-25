@@ -32,6 +32,12 @@ export const ROUTES: RouteInfo[] = [
     class: "active-pro",
   },
   { path: "/farm", title: "Ferma Ta", icon: "pe-7s-sun", class: "" },
+  {
+    path: "/financing",
+    title: "Programe Finantare",
+    icon: "pe-7s-piggy",
+    class: "",
+  },
 ];
 
 @Component({

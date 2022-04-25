@@ -17,13 +17,13 @@ import { RegisterComponent } from "./register/register.component";
 import { FarmComponent } from "./farm/farm.component";
 import { IsAuthenticated } from "./_guards/isauthenticated.guard";
 import { IsNotAuthenticated } from "./_guards/isnotauthenticated.guard";
-
+import { AvailableFinancingComponent } from "./available-financing/available-financing.component";
 
 const routes: Routes = [
   {
     path: "",
     component: ShellComponent,
-    runGuardsAndResolvers:'always',
+    runGuardsAndResolvers: "always",
     canActivate: [IsAuthenticated],
     children: [
       { path: "dashboard", component: HomeComponent },
@@ -35,28 +35,29 @@ const routes: Routes = [
       { path: "notifications", component: NotificationsComponent },
       { path: "upgrade", component: UpgradeComponent },
       { path: "farm", component: FarmComponent },
+      { path: "financing", component: AvailableFinancingComponent },
     ],
   },
   {
     path: "",
     component: LoginComponent,
-    canActivate: [IsNotAuthenticated]
+    canActivate: [IsNotAuthenticated],
   },
   {
     path: "login",
     component: LoginComponent,
-    canActivate: [IsNotAuthenticated]
+    canActivate: [IsNotAuthenticated],
   },
   {
     path: "register",
     component: RegisterComponent,
-    canActivate: [IsNotAuthenticated]
+    canActivate: [IsNotAuthenticated],
   },
   {
     path: "**",
     redirectTo: "/login",
     pathMatch: "full",
-    canActivate: [IsNotAuthenticated]
+    canActivate: [IsNotAuthenticated],
   },
 ];
 

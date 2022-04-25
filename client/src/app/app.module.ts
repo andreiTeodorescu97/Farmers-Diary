@@ -29,6 +29,7 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { FarmComponent } from "./farm/farm.component";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AvailableFinancingComponent } from './available-financing/available-financing.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ShellComponent,
     RegisterComponent,
     FarmComponent,
+    AvailableFinancingComponent,
   ],
   imports: [
     CommonModule,
