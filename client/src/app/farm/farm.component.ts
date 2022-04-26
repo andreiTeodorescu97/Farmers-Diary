@@ -10,6 +10,7 @@ import { AddParcel } from "app/_models/farm/addparcel";
 import { County } from "app/_models/farm/county";
 import { Culture } from "app/_models/farm/culture";
 import { EditParcel } from "app/_models/farm/editparcel";
+import { Parcel } from "app/_models/farm/parcel";
 import { CollectionsService } from "app/_services/collections.service";
 import { FarmService } from "app/_services/farm.service";
 import { NotificationsService } from "app/_services/notifications.service";
@@ -23,17 +24,18 @@ import { map } from "rxjs/operators";
 })
 export class FarmComponent implements OnInit {
   modalRef?: BsModalRef;
+  registerParcel = {} as AddParcel;
+  @ViewChild("postForm") pForm: NgForm;
+  loadedCultures: Array<Culture> = [];
+  loadedCounties: Array<County> = [];
+  parcels: Array<Parcel> = [];
+
   constructor(
     private modalService: BsModalService,
     private collectionService: CollectionsService,
     private farmService: FarmService,
     private notificationService: NotificationsService
   ) {}
-  registerParcel = {} as AddParcel;
-  @ViewChild("postForm") pForm: NgForm;
-  loadedCultures: Culture[] = [];
-  loadedCounties: County[] = [];
-  parcels: any = [];
 
   ngOnInit(): void {
     this.onGetCultures();
@@ -50,63 +52,58 @@ export class FarmComponent implements OnInit {
   }
 
   onGetCultures() {
-    this.collectionService
-      .getCultures()
-      .pipe(
-        map((responseData) => {
-          const culturesArray: Culture[] = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              culturesArray.push({ ...responseData[key] });
-            }
-          }
-          return culturesArray;
-        })
-      )
-      .subscribe((culturesData) => {
-        this.loadedCultures = culturesData;
-      });
+    this.collectionService.getCultures().subscribe((response) => {
+      this.loadedCultures = response;
+    });
   }
 
   onGetCounties() {
-    this.collectionService
-      .getCounties()
-      .pipe(
-        map((responseData) => {
-          const countiesArray: County[] = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              countiesArray.push({ ...responseData[key] });
-            }
-          }
-          return countiesArray;
-        })
-      )
-      .subscribe((countiesData) => {
-        this.loadedCounties = countiesData;
-        console.log(this.loadedCounties);
-      });
+    this.collectionService.getCounties().subscribe((response) => {
+      this.loadedCounties = response;
+    });
   }
 
   onAddParcel() {
     this.registerParcel.countyId = +this.registerParcel.countyId;
     this.registerParcel.cultureId = +this.registerParcel.cultureId;
     this.farmService.addParcel(this.registerParcel).subscribe(
-      (respone) => {
-        this.notificationService.showSuccess("Contul a fost creat cu success!");
+      () => {
+        this.notificationService.showSuccess(
+          "Parcela a fost adaugata cu succes!"
+        );
         this.onGetParcels();
       },
       (error) => {
         console.log(error);
       }
-      // this.parcels.push(this.registerParcel)
     );
-    // this.onGetParcels();
     this.modalRef.hide();
   }
 
+  onDeleteParcel(parcelToDelte: Parcel) {
+    if (
+      confirm(`Esti sigur ca vrei sa stergi parcela ${parcelToDelte.name}?`)
+    ) {
+      this.farmService.deleteParcel(parcelToDelte.id).subscribe(
+        () => {
+          this.notificationService.showSuccess(
+            "Parcela a fost stearsa cu succes!"
+          );
+          this.onGetParcels();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  onViewParcel() {
+    alert("TO BE IMPLEMENTED!");
+  }
+
   onGetParcels() {
-    this.parcels = this.farmService.getParcels().subscribe((data) => {
+    this.farmService.getParcels().subscribe((data) => {
       this.parcels = data;
     });
   }

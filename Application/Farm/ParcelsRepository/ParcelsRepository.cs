@@ -21,11 +21,10 @@ namespace Application.Farm.ParcelsRepository
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<AddParcelDTO>> GetParcelsForUser(int userId)
+        public async Task<IEnumerable<GetParcelDTO>> GetParcelsForUser(int userId)
         {
-            var parcels = await _context.Parcels
-                .Where(c => c.AppUserId == userId)
-                .Select(c => _mapper.Map<Parcel, AddParcelDTO>(c))
+            var parcels = await _mapper.ProjectTo<GetParcelDTO>(_context.Parcels
+                .Where(c => c.AppUserId == userId))
                 .ToListAsync();
 
             return parcels;
@@ -58,7 +57,7 @@ namespace Application.Farm.ParcelsRepository
 
         public bool CheckUserParcelCombination(int userId, long parcelId)
         {
-            var result =  _context.Parcels.Any(c => c.AppUserId == userId && c.Id == parcelId);
+            var result = _context.Parcels.Any(c => c.AppUserId == userId && c.Id == parcelId);
             return result;
         }
 

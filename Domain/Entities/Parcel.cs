@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using System;
+
+namespace Domain.Entities
 {
     public class Parcel
     {
@@ -11,5 +13,6 @@
         public virtual County County { get; set; }
         public int AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
+        public DateTime? DateAdded { get; set; }
     }
 }

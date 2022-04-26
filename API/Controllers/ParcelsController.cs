@@ -21,7 +21,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IEnumerable<AddParcelDTO>> GetParcelsForUser()
+        public async Task<IEnumerable<GetParcelDTO>> GetParcelsForUser()
         {
             var userId = User.GetUserId();
             var result = await _parcelsRepository.GetParcelsForUser(userId);
@@ -35,7 +35,7 @@ namespace API.Controllers
             var userId = User.GetUserId();
             request.AppUserId = userId;
             await _parcelsRepository.AddParcel(request);
-            return Ok("Parcela a fost adaugata cu succes!");
+            return Ok();
         }
 
         [HttpPut]
@@ -49,7 +49,7 @@ namespace API.Controllers
             }
             request.AppUserId = userId;
             await _parcelsRepository.EditParcel(request);
-            return Ok("Parcela a fost editata cu succes!");
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -62,7 +62,7 @@ namespace API.Controllers
                 return BadRequest("Id-ul de parcela este invalid sau nu apartine user-ului!");
             }
             await _parcelsRepository.DeleteParcel(id);
-            return Ok("Parcela a fost stearsa cu succes!");
+            return Ok();
         }
 
 

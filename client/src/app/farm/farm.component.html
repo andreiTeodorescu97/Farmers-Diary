@@ -1,91 +1,91 @@
-<button
-  type="button"
-  class="btn btn-primary"
-  (click)="addParcelModal(template)"
->
-  Adauga parcela
-</button>
-
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title text-center">ADAUGA PARCELA</h4>
+    <h4 class="modal-title pull-left">ADAUGA PARCELA</h4>
+  </div>
+  <div class="modal-body">
     <form #registerForm="ngForm" (ngSubmit)="onAddParcel()">
-      <div class="form-group row">
-        <label for="parcelName" class="col-sm-3 col-form-label"
-          >Denumire parcela:</label
-        >
-        <div class="col-sm-9">
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Denumire parcela)</label>
           <input
             type="text"
+            class="form-control"
             name="parcel-name"
-            class="form-control form-control-lg"
+            placeholder="Denumire parcela"
             id="parcel-name"
             [(ngModel)]="registerParcel.name"
           />
         </div>
       </div>
 
-      <div class="form-group row">
-        <label for="parcelArea" class="col-sm-3 col-form-label"
-          >Arie parcela (ha):</label
-        >
-        <div class="col-sm-9">
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Arie parcela (ha)</label>
           <input
             type="number"
+            class="form-control"
             name="parcel-area"
-            class="form-control form-control-lg"
+            placeholder="Suprafata in hectare"
             id="parcel-area"
             [(ngModel)]="registerParcel.surface"
           />
         </div>
       </div>
-
-      <div class="form-group row">
-        <label for="select-culture" class="col-sm-3 col-form-label"
-          >Cultura:</label
-        >
-        <select
-          class="col-sm-9"
-          id="select-culture"
-          name="select-culture"
-          aria-label="Selectati cultura"
-          placeholder="Selectati Cultura"
-          [(ngModel)]="+registerParcel.cultureId"
-        >
-          <option
-            *ngFor="let pickedCulture of loadedCultures"
-            [value]="pickedCulture.id"
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label for="select-county">Cultura</label>
+          <select
+            class="form-control"
+            name="select-culture"
+            id="select-culture"
+            aria-label="Selectati cultura"
+            placeholder="Selectati Cultura"
+            [(ngModel)]="+registerParcel.cultureId"
           >
-            {{ pickedCulture.name }}
-          </option>
-        </select>
+            <option
+              *ngFor="let pickedCulture of loadedCultures"
+              [value]="pickedCulture.id"
+            >
+              {{ pickedCulture.name }}
+            </option>
+          </select>
+        </div>
       </div>
 
-      <div class="form-group row">
-        <label for="select-county" class="col-sm-3 col-form-label"
-          >Judet:</label
-        >
-        <select
-          class="col-sm-9"
-          name="select-county"
-          id="select-county"
-          aria-label="Selectati judetul"
-          placeholder="Selectati Judetul"
-          [(ngModel)]="+registerParcel.countyId"
-        >
-          <option
-            *ngFor="let pickedCounty of loadedCounties"
-            [value]="pickedCounty.id"
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label for="select-county">Judet:</label>
+          <select
+            class="form-control"
+            name="select-county"
+            id="select-county"
+            [(ngModel)]="+registerParcel.countyId"
           >
-            {{ pickedCounty.name }}
-          </option>
-        </select>
+            <option
+              *ngFor="let pickedCounty of loadedCounties"
+              [value]="pickedCounty.id"
+            >
+              {{ pickedCounty.name }}
+            </option>
+          </select>
+        </div>
       </div>
-
-      <button type="submit" class="btn btn-primary">Salveaza Parcela</button>
-      <button type="button" class="btn btn-danger" (click)="closeParcelModal()">
-        Inchide
-      </button>
+      <div class="form-group">
+        <button
+          class="btn btn-success btn-fill"
+          type="submit"
+          style="margin-right: 5px"
+        >
+          Adauga
+        </button>
+        <button
+          class="btn btn-danger btn-fill"
+          (click)="closeParcelModal()"
+          type="button"
+        >
+          Renunta
+        </button>
+      </div>
     </form>
   </div>
 </ng-template>
@@ -93,58 +93,64 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="card">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nume parcela</th>
-            <th scope="col">Dimensiune (ha)</th>
-            <th scope="col">Cultura</th>
-            <th scope="col">Judet</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let parcel of parcels; let i = index">
-            <th scope="row">{{ i }}</th>
-            <td>{{ parcel.name }}</td>
-            <td>{{ parcel.surface }}</td>
-            <td>{{ loadedCultures[parcel.cultureId - 1].name }}</td>
-            <td>{{ loadedCounties[parcel.countyId - 1].name }}</td>
-            <td>
-              <button class="btn btn-primary">Editeaza parcela</button>
-
-              <button class="btn btn-danger pe-7s-trash">Sterge parcela</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="header">
+        <h4 class="title">Parcelele tale</h4>
+      </div>
+      <div class="content">
+        <button
+          type="button"
+          class="btn btn-primary btn-fill pull-left"
+          (click)="addParcelModal(template)"
+        >
+          Adauga parcela
+        </button>
+        <div class="clearfix"></div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- <div class="main-content">
-  <div *ngFor="let parcel of parcels">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="header">
-              <h4 class="measure-title title">{{ parcel.name }}</h4>
-              <hr />
-              <p class="criteria-title text-left">
-                Suprafata: {{ parcel.surface }} (ha)
-              </p>
-              <p class="criteria-title text-left">
-                Cultura: {{ loadedCultures[parcel.cultureId - 1].name }}
-              </p>
-              <p class="criteria-title text-left">
-                Judet: {{ loadedCounties[parcel.countyId - 1].name }}
-              </p>
-              <br />
-            </div>
-          </div>
-        </div>
+    <div class="card">
+      <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Nume parcela</th>
+              <th scope="col">Dimensiune (ha)</th>
+              <th scope="col">Cultura</th>
+              <th scope="col">Judet</th>
+              <th scope="col">Data adaugarii</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let parcel of parcels; let i = index">
+              <td>{{ parcel.name }}</td>
+              <td>{{ parcel.surface }}</td>
+              <td>{{ parcel.cultureName }}</td>
+              <td>{{ parcel.countyName }}</td>
+              <td>{{ parcel.dateAdded }}</td>
+              <td>
+                <div class="form-group pull-right">
+                  <button
+                    class="btn btn-primary btn-fill"
+                    type="button"
+                    style="margin-right: 5px"
+                    (click)="onViewParcel()"
+                  >
+                    Vezi parcela
+                  </button>
+                  <button
+                    class="btn btn-danger btn-fill"
+                    (click)="onDeleteParcel(parcel)"
+                    type="button"
+                  >
+                    Sterge
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-</div> -->
+</div>

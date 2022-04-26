@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AddParcel } from "app/_models/farm/addparcel";
 import { EditParcel } from "app/_models/farm/editparcel";
+import { Parcel } from "app/_models/farm/parcel";
 import { environment } from "environments/environment";
 
 @Injectable({
@@ -13,7 +14,7 @@ export class FarmService {
   constructor(private http: HttpClient) {}
 
   getParcels() {
-    return this.http.get(this.parcelsUrl);
+    return this.http.get<Parcel[]>(this.parcelsUrl);
   }
 
   addParcel(model: AddParcel) {
