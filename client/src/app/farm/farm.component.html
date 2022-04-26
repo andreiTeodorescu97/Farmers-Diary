@@ -91,6 +91,33 @@
 </ng-template>
 
 <div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nume parcela</th>
+            <th scope="col">Dimensiune (ha)</th>
+            <th scope="col">Cultura</th>
+            <th scope="col">Judet</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let parcel of parcels; let i = index">
+            <th scope="row">{{ i }}</th>
+            <td>{{ parcel.name }}</td>
+            <td>{{ parcel.surface }}</td>
+            <td>{{ loadedCultures[parcel.cultureId - 1].name }}</td>
+            <td>{{ loadedCounties[parcel.countyId - 1].name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="main-content">
   <div *ngFor="let parcel of parcels">
     <div class="container-fluid">
       <div class="row">
@@ -115,4 +142,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
