@@ -1,9 +1,10 @@
-export interface EditParcel {
+export interface Parcel {
   id: number;
   name: string;
   surface: number;
   cultureName: string;
   cultureId: number;
   countyId: number;
-  surfaceName: string;
+  countyName: string;
+  dateAdded: string;
 }

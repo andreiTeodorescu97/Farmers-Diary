@@ -13,10 +13,10 @@ export class CollectionsService {
   constructor(private http: HttpClient) {}
 
   getCultures() {
-    return this.http.get<{ [key: string]: Culture }>(this.url + "cultures");
+    return this.http.get<Culture[]>(this.url + "cultures");
   }
 
   getCounties() {
-    return this.http.get<{ [key: string]: County }>(this.url + "counties");
+    return this.http.get<County[]>(this.url + "counties");
   }
 }
