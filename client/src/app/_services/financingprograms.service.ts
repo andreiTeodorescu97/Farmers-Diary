@@ -16,5 +16,15 @@ export class FinancingProgramsService {
       new Criteria(2, "Plantatie", "Porumb"),
       new Criteria(3, "Ingrasaminte", "XMC-25"),
     ]),
+    new FinancingProgram(3, "Submasura 5.3", [
+      new Criteria(1, "Hectare", 12),
+      new Criteria(2, "Plantatie", "Porumb"),
+      new Criteria(3, "Ingrasaminte", "XMC-25"),
+    ]),
+    new FinancingProgram(4, "Submasura 6.1", [
+      new Criteria(1, "Hectare", 7),
+      new Criteria(2, "Plantatie", "Porumb"),
+      new Criteria(3, "Ingrasaminte", "XMC-25"),
+    ]),
   ];
 }
