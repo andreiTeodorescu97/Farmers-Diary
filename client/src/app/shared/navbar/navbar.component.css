@@ -1,0 +1,7 @@
+.logout-btn {
+  color: white !important;
+}
+
+.logout-btn:hover {
+  color: cadetblue !important;
+}

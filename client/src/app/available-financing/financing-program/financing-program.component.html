@@ -1,0 +1,14 @@
+<div class="card text-center">
+  <div class="card-header text-left">Programul {{ program.id }}</div>
+  <div class="card-body">
+    <h5 class="card-title">{{ program.name }}</h5>
+    <p>Criterii:</p>
+    <ul>
+      <li *ngFor="let criteria of program.criteria">
+        {{ criteria.id }} - {{ criteria.name }} : {{ criteria.amount }}
+      </li>
+    </ul>
+    <a href="#" class="btn btn-primary">Mai multe detalii</a>
+  </div>
+  <div class="card-footer text-muted">2 days ago</div>
+</div>

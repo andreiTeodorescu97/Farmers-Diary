@@ -14,6 +14,7 @@ import { Observable } from "rxjs";
   // moduleId: module.id,
   selector: "navbar-cmp",
   templateUrl: "navbar.component.html",
+  styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
   private listTitles: any[];
