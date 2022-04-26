@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { AddParcel } from "app/_models/farm/addparcel";
 import { County } from "app/_models/farm/county";
 import { Culture } from "app/_models/farm/culture";
+import { EditParcel } from "app/_models/farm/editparcel";
 import { CollectionsService } from "app/_services/collections.service";
 import { FarmService } from "app/_services/farm.service";
 import { NotificationsService } from "app/_services/notifications.service";
@@ -26,10 +27,12 @@ export class FarmComponent implements OnInit {
   @ViewChild("postForm") pForm: NgForm;
   loadedCultures: Culture[] = [];
   loadedCounties: County[] = [];
+  parcels: any = [];
 
   ngOnInit(): void {
     this.onGetCultures();
     this.onGetCounties();
+    this.onGetParcels();
   }
 
   addParcelModal(template: TemplateRef<any>) {
@@ -75,6 +78,7 @@ export class FarmComponent implements OnInit {
       )
       .subscribe((countiesData) => {
         this.loadedCounties = countiesData;
+        console.log(this.loadedCounties);
       });
   }
 
@@ -90,5 +94,11 @@ export class FarmComponent implements OnInit {
       }
     );
     this.modalRef.hide();
+  }
+
+  onGetParcels() {
+    this.parcels = this.farmService.getParcels().subscribe((data) => {
+      this.parcels = data;
+    });
   }
 }
