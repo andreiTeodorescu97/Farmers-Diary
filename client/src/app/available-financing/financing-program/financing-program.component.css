@@ -1,25 +1,12 @@
-.pad-card {
-  padding: 20px 0px 0px 20px;
-}
-
 .measure-title {
   font-weight: 800;
 }
 
-.criteria-body {
-  width: 80%;
-  margin: auto;
-}
-
 .criteria-title {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .criteria-items {
   font-weight: 200;
-}
-
-.expand-button {
-  padding-right: 30px;
 }

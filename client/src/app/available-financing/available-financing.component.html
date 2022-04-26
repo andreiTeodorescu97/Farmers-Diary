@@ -1,7 +1,10 @@
-<app-financing-program
-  *ngFor="let program of availablePrograms"
-  [program]="program"
-></app-financing-program>
+<div class="main-content">
+  <app-financing-program
+    *ngFor="let program of availablePrograms"
+    [program]="program"
+  ></app-financing-program>
+</div>
+
 <!-- <div *ngFor="let program of availablePrograms">
   <div class="card text-center">
     <div class="card-header text-left">Programul {{ program.id }}</div>
