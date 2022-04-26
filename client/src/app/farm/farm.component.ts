@@ -1,4 +1,10 @@
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnChanges,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { AddParcel } from "app/_models/farm/addparcel";
 import { County } from "app/_models/farm/county";
@@ -88,11 +94,14 @@ export class FarmComponent implements OnInit {
     this.farmService.addParcel(this.registerParcel).subscribe(
       (respone) => {
         this.notificationService.showSuccess("Contul a fost creat cu success!");
+        this.onGetParcels();
       },
       (error) => {
         console.log(error);
       }
+      // this.parcels.push(this.registerParcel)
     );
+    // this.onGetParcels();
     this.modalRef.hide();
   }
 
