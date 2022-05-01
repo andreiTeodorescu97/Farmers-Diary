@@ -109,7 +109,54 @@
     </div>
 
     <div class="card">
-      <div class="content table-responsive table-full-width">
+      <div class="row">
+        <div class="col-md-12">
+                <div class="card-body">
+                    <table style="width:100%" datatable [dtOptions]="dtOptions"
+                        [dtTrigger]="dtTrigger" class="row-border hover">
+                        <thead>
+                            <tr>
+                              <th>Nume parcela</th>
+                              <th>Dimensiune (ha)</th>
+                              <th>Cultura</th>
+                              <th>Judet</th>
+                              <th>Data adaugarii</th>
+                              <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let parcel of parcels; let i = index">
+                            <td>{{ parcel.name }}</td>
+                            <td>{{ parcel.surface }}</td>
+                            <td>{{ parcel.cultureName }}</td>
+                            <td>{{ parcel.countyName }}</td>
+                            <td>{{ parcel.dateAdded }}</td>
+                            <td>
+                              <div class="form-group pull-right">
+                                <button
+                                  class="btn btn-primary btn-fill"
+                                  type="button"
+                                  style="margin-right: 5px"
+                                  (click)="onViewParcel()"
+                                >
+                                  Vezi parcela
+                                </button>
+                                <button
+                                  class="btn btn-danger btn-fill"
+                                  (click)="onDeleteParcel(parcel)"
+                                  type="button"
+                                >
+                                  Sterge
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+      <!-- <div class="content table-responsive table-full-width">
         <table class="table table-hover table-striped">
           <thead>
             <tr>
@@ -150,7 +197,7 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

@@ -1,11 +1,14 @@
 import {
   Component,
   OnChanges,
+  OnDestroy,
   OnInit,
   TemplateRef,
   ViewChild,
 } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { DataTableDirective } from "angular-datatables";
+import { gridSettings } from "app/_grid/gridSettings";
 import { AddParcel } from "app/_models/farm/addparcel";
 import { County } from "app/_models/farm/county";
 import { Culture } from "app/_models/farm/culture";
@@ -15,6 +18,7 @@ import { CollectionsService } from "app/_services/collections.service";
 import { FarmService } from "app/_services/farm.service";
 import { NotificationsService } from "app/_services/notifications.service";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { Subject } from "rxjs/internal/Subject";
 import { map } from "rxjs/operators";
 
 @Component({
@@ -22,13 +26,18 @@ import { map } from "rxjs/operators";
   templateUrl: "./farm.component.html",
   styleUrls: ["./farm.component.css"],
 })
-export class FarmComponent implements OnInit {
+export class FarmComponent implements OnInit, OnDestroy {
   modalRef?: BsModalRef;
   registerParcel = {} as AddParcel;
   @ViewChild("postForm") pForm: NgForm;
   loadedCultures: Array<Culture> = [];
   loadedCounties: Array<County> = [];
   parcels: Array<Parcel> = [];
+
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(
     private modalService: BsModalService,
@@ -41,6 +50,20 @@ export class FarmComponent implements OnInit {
     this.onGetCultures();
     this.onGetCounties();
     this.onGetParcels();
+    this.initializeGrid();
+  }
+
+  initializeGrid() {
+    this.dtOptions = {
+      pagingType: "full_numbers",
+      pageLength: 10,
+      searching: false,
+      language: gridSettings,
+    };
+    this.farmService.getParcels().subscribe((data) => {
+      this.parcels = data;
+      this.dtTrigger.next();
+    });
   }
 
   addParcelModal(template: TemplateRef<any>) {
@@ -98,6 +121,11 @@ export class FarmComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
   onViewParcel() {
     alert("TO BE IMPLEMENTED!");
   }
@@ -105,6 +133,16 @@ export class FarmComponent implements OnInit {
   onGetParcels() {
     this.farmService.getParcels().subscribe((data) => {
       this.parcels = data;
+      this.rerenderGrid();
+    });
+  }
+
+  rerenderGrid(){
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next();
     });
   }
 }

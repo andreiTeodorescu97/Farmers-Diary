@@ -31,6 +31,7 @@ import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AvailableFinancingComponent } from './available-financing/available-financing.component';
 import { FinancingProgramComponent } from './available-financing/financing-program/financing-program.component';
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { FinancingProgramComponent } from './available-financing/financing-progr
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
+    DataTablesModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
