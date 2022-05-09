@@ -18,6 +18,7 @@ import { FarmComponent } from "./farm/farm.component";
 import { IsAuthenticated } from "./_guards/isauthenticated.guard";
 import { IsNotAuthenticated } from "./_guards/isnotauthenticated.guard";
 import { AvailableFinancingComponent } from "./available-financing/available-financing.component";
+import { MachineryComponent } from "./machinery/machinery.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: "upgrade", component: UpgradeComponent },
       { path: "farm", component: FarmComponent },
       { path: "financing", component: AvailableFinancingComponent },
+      { path: "machinery", component: MachineryComponent },
     ],
   },
   {

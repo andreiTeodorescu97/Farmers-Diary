@@ -34,7 +34,7 @@ export class FarmComponent implements OnInit, OnDestroy {
   loadedCounties: Array<County> = [];
   parcels: Array<Parcel> = [];
 
-  @ViewChild(DataTableDirective, {static: false})
+  @ViewChild(DataTableDirective, { static: false })
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -137,7 +137,7 @@ export class FarmComponent implements OnInit, OnDestroy {
     });
   }
 
-  rerenderGrid(){
+  rerenderGrid() {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first
       dtInstance.destroy();

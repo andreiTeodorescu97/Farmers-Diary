@@ -38,6 +38,7 @@ export const ROUTES: RouteInfo[] = [
     icon: "pe-7s-piggy",
     class: "",
   },
+  { path: "/machinery", title: "Utilaje", icon: "pe-7s-car", class: "" },
 ];
 
 @Component({

@@ -28,10 +28,11 @@ import { ToastrModule } from "ngx-toastr";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { FarmComponent } from "./farm/farm.component";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { AvailableFinancingComponent } from './available-financing/available-financing.component';
-import { FinancingProgramComponent } from './available-financing/financing-program/financing-program.component';
+import { BsDropdownModule } from "ngx-bootstrap/dropdown";
+import { AvailableFinancingComponent } from "./available-financing/available-financing.component";
+import { FinancingProgramComponent } from "./available-financing/financing-program/financing-program.component";
 import { DataTablesModule } from "angular-datatables";
+import { MachineryComponent } from "./machinery/machinery.component";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DataTablesModule } from "angular-datatables";
     FarmComponent,
     AvailableFinancingComponent,
     FinancingProgramComponent,
+    MachineryComponent,
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,7 @@ import { DataTablesModule } from "angular-datatables";
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
-    DataTablesModule
+    DataTablesModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

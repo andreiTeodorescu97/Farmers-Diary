@@ -35,6 +35,7 @@
     "core-js": "^2.5.0",
     "datatables.net": "^1.10.20",
     "datatables.net-bs": "^1.10.20",
+    "datatables.net-dt": "^1.11.5",
     "font-awesome": "^4.7.0",
     "googleapis": "66.0.0",
     "jquery": "3.5.1",
