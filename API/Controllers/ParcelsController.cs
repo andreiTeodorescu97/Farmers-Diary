@@ -23,7 +23,7 @@ namespace API.Controllers
         [Authorize]
         public async Task<IEnumerable<GetParcelDTO>> GetParcelsForUser()
         {
-            var userId = User.GetUserId(); ;
+            var userId = User.GetUserId();
             var result = await _parcelsRepository.GetParcelsForUser(userId);
             return result;
         }
