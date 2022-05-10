@@ -19,6 +19,9 @@ export class MachineryComponent implements OnInit {
     "Rotor",
     "Compactor",
     "Masina de erbicidat",
+    "Semanator",
+    "Plug",
+    "Cositoare",
   ];
 
   constructor(private modalService: BsModalService) {}

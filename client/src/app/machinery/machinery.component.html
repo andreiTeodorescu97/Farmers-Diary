@@ -1,6 +1,6 @@
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">ADAUGA PARCELA</h4>
+    <h4 class="modal-title pull-left">ADAUGA UTILAJ</h4>
   </div>
   <div class="modal-body">
     <form #registerForm="ngForm" (ngSubmit)="onAddParcel()">
@@ -29,6 +29,22 @@
         <div class="form-group col-md-6">
           <label>Model</label>
           <input type="text" class="form-control" name="parcel-name" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label>Nr.Inmatriculare</label>
+          <input type="text" class="form-control" name="parcel-name" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Data fabricatie</label>
+          <input type="date" class="form-control" name="parcel-name" />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Data achizitie</label>
+          <input type="date" class="form-control" name="parcel-name" />
         </div>
       </div>
 
