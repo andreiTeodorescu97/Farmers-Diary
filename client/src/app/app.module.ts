@@ -14,7 +14,6 @@ import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { IconsComponent } from "./icons/icons.component";
 import { LoginComponent } from "./login/login.component";
-import { MapsComponent } from "./maps/maps.component";
 import { NotificationsComponent } from "./notifications/notifications.component";
 import { TablesComponent } from "./tables/tables.component";
 import { TypographyComponent } from "./typography/typography.component";
@@ -42,7 +41,6 @@ import { MachineryComponent } from "./machinery/machinery.component";
     TablesComponent,
     TypographyComponent,
     IconsComponent,
-    MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
     LoginComponent,

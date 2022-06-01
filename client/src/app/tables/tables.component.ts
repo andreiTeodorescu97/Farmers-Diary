@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { environment } from './../../environments/environment';
 
 declare interface TableData {
   headerRow: string[];
@@ -46,7 +47,7 @@ export class TablesComponent implements OnInit {
   }
 
   getUsers() {
-    this.http.get("https://localhost:5001/api/users").subscribe(
+    this.http.get(environment.apiUrl + "users").subscribe(
       (response) => {
         this.users = response;
       },

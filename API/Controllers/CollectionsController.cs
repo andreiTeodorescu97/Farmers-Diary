@@ -16,10 +16,15 @@ namespace API.Controllers
         public CollectionsController(JFContext context, IMapper mapper) : base(context, mapper) { }
 
         [HttpGet("counties")]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<CountyDTO>>> GetCounties()
         {
             return await _context.Counties.Select(c => _mapper.Map<County, CountyDTO>(c)).ToListAsync();
+        }
+
+        [HttpGet("countiesBad")]
+        public ActionResult<IEnumerable<CountyDTO>> GetCountiesBad()
+        {
+            return _context.Counties.Select(c => _mapper.Map<County, CountyDTO>(c)).ToList();
         }
 
         [HttpGet("cultures")]

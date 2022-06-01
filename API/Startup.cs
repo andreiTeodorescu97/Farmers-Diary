@@ -51,6 +51,10 @@ namespace API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+                app.UseCors(policy => policy
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins(_config.GetSection("HostName").Value));
             }
 
             app.UseHttpsRedirection();
@@ -59,16 +63,19 @@ namespace API
 
             app.UseCors(policy => policy
                 .AllowAnyHeader()
-                .AllowAnyMethod()
-                .WithOrigins(_config.GetSection("HostName").Value));
+                .AllowAnyMethod());
 
             app.UseAuthentication();
 
             app.UseAuthorization();
 
+            app.UseDefaultFiles(); //use index.htmhl
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
