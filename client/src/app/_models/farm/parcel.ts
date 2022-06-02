@@ -1,6 +1,7 @@
 export interface Parcel {
   id: number;
   name: string;
+  physicalBlock: string;
   surface: number;
   cultureName: string;
   cultureId: number;

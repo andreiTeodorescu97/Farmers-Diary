@@ -6,6 +6,20 @@
     <form #registerForm="ngForm" (ngSubmit)="onAddParcel()">
       <div class="row col-md-12">
         <div class="form-group">
+          <label>Bloc fizic</label>
+          <input
+            type="text"
+            class="form-control"
+            name="physicalBlock"
+            placeholder="Bloc fizic"
+            id="physicalBlock"
+            [(ngModel)]="registerParcel.physicalBlock"
+          />
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="form-group">
           <label>Denumire parcela</label>
           <input
             type="text"
@@ -116,6 +130,7 @@
                         [dtTrigger]="dtTrigger" class="row-border hover">
                         <thead>
                             <tr>
+                              <th>Bloc fizic</th>
                               <th>Nume parcela</th>
                               <th>Dimensiune (ha)</th>
                               <th>Cultura</th>
@@ -126,6 +141,7 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let parcel of parcels; let i = index">
+                            <td>{{ parcel.physicalBlock }}</td>
                             <td>{{ parcel.name }}</td>
                             <td>{{ parcel.surface }}</td>
                             <td>{{ parcel.cultureName }}</td>

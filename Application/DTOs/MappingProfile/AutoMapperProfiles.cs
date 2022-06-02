@@ -1,4 +1,5 @@
-﻿using Application.DTOs.Collections;
+﻿using Application.DTOs.AppliedFertilizers;
+using Application.DTOs.Collections;
 using Application.DTOs.Farm;
 using AutoMapper;
 using Domain.Entities;
@@ -21,6 +22,11 @@ namespace Application.DTOs.MappingProfile
                 .ForMember(dest => dest.CountyName, options => options.MapFrom(source => source.County.Name))
                 .ForMember(dest => dest.CultureName, options => options.MapFrom(source => source.Culture.Name))
                 .ForMember(dest => dest.DateAdded, options => options.MapFrom(source => source.DateAdded.Value.ToString("dd/MM/yyyy")));
+
+            CreateMap<AddFertilizerDTO, AppliedFertilizer>()
+                .ForMember(dest => dest.DateAdded, options => options.MapFrom(source => DateTime.Now));
+
+            CreateMap<AppliedFertilizer, GetFertilizerDTO>();
         }
     }
 }

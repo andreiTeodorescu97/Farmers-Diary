@@ -4,14 +4,16 @@ using Domain.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(JFContext))]
-    partial class JFContextModelSnapshot : ModelSnapshot
+    [Migration("20220601151927_AddedPhysicalBlock")]
+    partial class AddedPhysicalBlock
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,44 +49,6 @@ namespace Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Domain.Entities.AppliedFertilizer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("AppliedWeightPerHa")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("DateAdded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateApplied")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FetilizerType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Observations")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ParcelId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Planned")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParcelId");
-
-                    b.ToTable("AppliedFertilizers");
                 });
 
             modelBuilder.Entity("Domain.Entities.County", b =>
@@ -157,17 +121,6 @@ namespace Domain.Migrations
                     b.HasIndex("CultureId");
 
                     b.ToTable("Parcels");
-                });
-
-            modelBuilder.Entity("Domain.Entities.AppliedFertilizer", b =>
-                {
-                    b.HasOne("Domain.Entities.Parcel", "Parcel")
-                        .WithMany()
-                        .HasForeignKey("ParcelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Parcel");
                 });
 
             modelBuilder.Entity("Domain.Entities.Parcel", b =>

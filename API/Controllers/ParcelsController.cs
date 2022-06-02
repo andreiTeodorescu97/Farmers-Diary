@@ -1,4 +1,6 @@
-﻿using Application.DTOs.Farm;
+﻿using Application.DTOs.AppliedFertilizers;
+using Application.DTOs.Farm;
+using Application.Farm.AppliedFertilizersRepository;
 using Application.Farm.ParcelsRepository;
 using AutoMapper;
 using Domain.DataContext;
@@ -13,10 +15,14 @@ namespace API.Controllers
     public class ParcelsController : BaseApiController
     {
         private readonly IParcelsRepository _parcelsRepository;
+        private readonly IAppliedFertilizersRepository _appliedFertilizersRepository;
 
-        public ParcelsController(JFContext context, IMapper mapper, IParcelsRepository parcelsRepository) : base(context, mapper)
+        public ParcelsController(JFContext context, IMapper mapper, 
+            IParcelsRepository parcelsRepository,
+            IAppliedFertilizersRepository appliedFertilizersRepository) : base(context, mapper)
         {
             _parcelsRepository = parcelsRepository;
+            _appliedFertilizersRepository = appliedFertilizersRepository;
         }
 
         [HttpGet]
@@ -65,6 +71,20 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpPost("applyFertilizer")]
+        [Authorize]
+        public async Task<IActionResult> ApplyFertilizer(AddFertilizerDTO request)
+        {
+            await _appliedFertilizersRepository.AddFertilizer(request);
+            return Ok();
+        }
 
+        [HttpGet("getFertilizers")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<GetFertilizerDTO>>> GetFertilizers()
+        {
+            var result = await _appliedFertilizersRepository.GetAppliedFertilizers(User.GetUserId());
+            return Ok(result);
+        }
     }
 }

@@ -3,6 +3,7 @@
     public class AddParcelDTO
     {
         public string Name { get; set; }
+        public string PhysicalBlock { get; set; }
         public decimal Surface { get; set; }
         public int CultureId { get; set; }
         public int CountyId { get; set; }

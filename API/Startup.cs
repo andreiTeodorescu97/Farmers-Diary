@@ -1,4 +1,5 @@
 using Application.DTOs.MappingProfile;
+using Application.Farm.AppliedFertilizersRepository;
 using Application.Farm.ParcelsRepository;
 using Application.Validators;
 using FluentValidation;
@@ -25,7 +26,10 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Repositories
             services.AddScoped<IParcelsRepository, ParcelsRepository>();
+            services.AddScoped<IAppliedFertilizersRepository, AppliedFertilizersRepository>();
+
             services.AddAplicationServices(_config);
 
             services.AddControllers().AddFluentValidation(s =>

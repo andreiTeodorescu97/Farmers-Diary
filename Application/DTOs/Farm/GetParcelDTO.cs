@@ -6,6 +6,7 @@ namespace Application.DTOs.Farm
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string PhysicalBlock { get; set; }
         public decimal Surface { get; set; }
         public int CultureId { get; set; }
         public string CultureName { get; set; }

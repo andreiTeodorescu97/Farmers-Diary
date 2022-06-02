@@ -14,6 +14,7 @@ namespace Domain.DataContext
         public DbSet<Parcel> Parcels { get; set; }
         public DbSet<Culture> Cultures { get; set; }
         public DbSet<County> Counties { get; set; }
+        public DbSet<AppliedFertilizer> AppliedFertilizers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -21,6 +22,10 @@ namespace Domain.DataContext
 
             builder.Entity<Parcel>()
             .Property(p => p.Surface)
+            .HasColumnType("decimal(18,2)");
+
+            builder.Entity<AppliedFertilizer>()
+            .Property(p => p.AppliedWeightPerHa)
             .HasColumnType("decimal(18,2)");
         }
     }
