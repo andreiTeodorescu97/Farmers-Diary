@@ -1,0 +1,486 @@
+<ng-template #fertilizer>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">ADAUGA INGRASAMINTE</h4>
+  </div>
+  <div class="modal-body">
+    <form #registerForm="ngForm" (ngSubmit)="onAddFertilizer()">
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Parcela</label>
+          <select
+            class="form-control"
+            name="parcelId"
+            id="parcelId"
+            aria-label="Parcela"
+            placeholder="Parcela"
+            [(ngModel)]="registerFertilizer.parcelId"
+          >
+            <option *ngFor="let parcel of parcels" [value]="parcel.id">
+              {{ parcel.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Planificat</label>
+          <input
+            type="text"
+            class="form-control"
+            name="planned"
+            placeholder="Planificat"
+            id="planned"
+            [(ngModel)]="registerFertilizer.planned"
+          />
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label for="select-county">Ingrasaminte aplicate</label>
+          <select
+            class="form-control"
+            name="fetilizerType"
+            id="fetilizerType"
+            aria-label="Selectati tipul ingrasamintelor"
+            placeholder="Selectati tipul ingrasamintelor"
+            [(ngModel)]="registerFertilizer.fetilizerType"
+          >
+            <option [value]="Organice">Organice</option>
+            <option [value]="Minerale">Minerale</option>
+          </select>
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Tip</label>
+          <input
+            type="text"
+            class="form-control"
+            name="type"
+            placeholder="Tip"
+            id="type"
+            [(ngModel)]="registerFertilizer.type"
+          />
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label
+            *ngIf="registerFertilizer.fetilizerType == Organice; else minerale"
+            >t/ha</label
+          >
+          <ng-template #minerale>
+            <label>kg/ha</label>
+          </ng-template>
+          <input
+            type="text"
+            class="form-control"
+            name="appliedWeightPerHa"
+            placeholder="0"
+            id="appliedWeightPerHa"
+            [(ngModel)]="registerFertilizer.appliedWeightPerHa"
+          />
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Data aplicarii</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            name="dateApplied"
+            placeholder="ZZ/LL/AAAA"
+            id="dateApplied"
+            [(ngModel)]="registerFertilizer.dateApplied"
+          />
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Observatii</label>
+          <textarea
+            type="input"
+            class="form-control"
+            name="observations"
+            placeholder="-"
+            id="observations"
+            [(ngModel)]="registerFertilizer.observations"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button
+          class="btn btn-success btn-fill"
+          type="submit"
+          style="margin-right: 5px"
+        >
+          Adauga
+        </button>
+        <button
+          class="btn btn-danger btn-fill"
+          (click)="closeFertilizerModal()"
+          type="button"
+        >
+          Renunta
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #treatments>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">ADAUGA TRATAMENTE</h4>
+  </div>
+  <div class="modal-body">
+    <form #registerForm="ngForm">
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Bloc fizic</label>
+          <input
+            type="text"
+            class="form-control"
+            name="physicalBlock"
+            placeholder="Bloc fizic"
+            id="physicalBlock"
+            [(ngModel)]="registerParcel.physicalBlock"
+          />
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Denumire parcela</label>
+          <input
+            type="text"
+            class="form-control"
+            name="parcel-name"
+            placeholder="Denumire parcela"
+            id="parcel-name"
+            [(ngModel)]="registerParcel.name"
+          />
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Arie parcela (ha)</label>
+          <input
+            type="number"
+            class="form-control"
+            name="parcel-area"
+            placeholder="Suprafata in hectare"
+            id="parcel-area"
+            [(ngModel)]="registerParcel.surface"
+          />
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label for="select-county">Cultura</label>
+          <select
+            class="form-control"
+            name="select-culture"
+            id="select-culture"
+            aria-label="Selectati cultura"
+            placeholder="Selectati Cultura"
+            [(ngModel)]="+registerParcel.cultureId"
+          >
+            <option
+              *ngFor="let pickedCulture of loadedCultures"
+              [value]="pickedCulture.id"
+            >
+              {{ pickedCulture.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label for="select-county">Judet:</label>
+          <select
+            class="form-control"
+            name="select-county"
+            id="select-county"
+            [(ngModel)]="+registerParcel.countyId"
+          >
+            <option
+              *ngFor="let pickedCounty of loadedCounties"
+              [value]="pickedCounty.id"
+            >
+              {{ pickedCounty.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <button
+          class="btn btn-success btn-fill"
+          type="button"
+          style="margin-right: 5px"
+        >
+          Adauga
+        </button>
+        <button
+          class="btn btn-danger btn-fill"
+          (click)="closeTreatmentModal()"
+          type="button"
+        >
+          Renunta
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="header">
+        <h4 class="title">Tratamente si ingrasaminte</h4>
+      </div>
+      <div class="content">
+        <button
+          type="button"
+          class="btn btn-primary btn-fill pull-left"
+          (click)="addFertilizerModal(fertilizer)"
+        >
+          Adauga ingrasaminte
+        </button>
+        <div class="clearfix"></div>
+      </div>
+      <div class="content">
+        <button
+          type="button"
+          class="btn btn-primary btn-fill pull-left"
+          (click)="addTreatmentModal(treatments)"
+        >
+          Adauga tratamente
+        </button>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            class="row-border hover"
+          >
+            <thead>
+              <tr>
+                <th rowspan="2">
+                  Data efectuarii tratamentului <br />
+                  (Z, L, A)
+                </th>
+                <th rowspan="2">Cultura si locul unde este situat terenul</th>
+                <th rowspan="2">Timpul aplicarii</th>
+                <th colspan="5">Tratamentul efectuat</th>
+                <th rowspan="2">
+                  Numele, prenumele persoanei responsabile de efectuarea
+                  tratamentului <br />Semnatura
+                </th>
+                <th rowspan="2">
+                  Data inceperii recoltarii produsului agricol
+                </th>
+                <th rowspan="2">
+                  Nr. si data documentului prin care s-a dat in consum
+                  populatiei
+                </th>
+              </tr>
+              <tr>
+                <th>Agentul de daunare: boli/daunatori/buruieni</th>
+                <th>Denumire PPP folosita</th>
+                <th>Doza omologata/doza folosita</th>
+                <th>Suprafata (ha)</th>
+                <th>Cantitati utilizate (kg, l)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>11.04 - 21.04.2021</td>
+                <td>Porumb</td>
+                <td>Postmugurit</td>
+                <td>Buruieni si inca ceva</td>
+                <td>TSalvatov</td>
+                <td>1-1,5l/ha <br />1,49l/ha</td>
+                <td>136,79</td>
+                <td>204,0</td>
+                <td>Popescu Alexandru</td>
+                <td>15.09.2021</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>11.04 - 21.04.2021</td>
+                <td>Porumb</td>
+                <td>Postmugurit</td>
+                <td>Buruieni si inca ceva</td>
+                <td>Teudeo</td>
+                <td>1-1,5l/ha <br />1-1,5l/ha</td>
+                <td>10</td>
+                <td>20</td>
+                <td>Popescu Alexandru</td>
+                <td>21.03.2021</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>11.04 - 21.04.2021</td>
+                <td>Floarea soarelui</td>
+                <td>Postmugurit</td>
+                <td>Buruieni si inca ceva</td>
+                <td>Teudeo</td>
+                <td>1-1,5l/ha <br />3-4l/ha</td>
+                <td>136,5</td>
+                <td>162</td>
+                <td>Popescu Alexandru</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>11.04 - 21.04.2021</td>
+                <td>Grau</td>
+                <td>Postmugurit</td>
+                <td>Buruieni neocrotitesi inca ceva</td>
+                <td>Listef</td>
+                <td>1-1,5l/ha <br />1,2l/ha</td>
+                <td>129,3</td>
+                <td>62,5</td>
+                <td>Popescu Alexandru</td>
+                <td>21.03.2021</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-body">
+            <table
+              style="width: 100%"
+              datatable
+              [dtOptions]="dtOptions"
+              [dtTrigger]="dtTrigger"
+              class="row-border hover"
+            >
+              <thead>
+                <tr>
+                  <th rowspan="4">Bloc fizic nr.</th>
+                  <th rowspan="3" colspan="2">Parcela</th>
+                  <th rowspan="4">Cultura</th>
+                  <th rowspan="4">Planificat <br />N (kg s.a./ha)</th>
+                  <th colspan="8">Realizat</th>
+                  <th rowspan="4">Observatii</th>
+                </tr>
+                <tr>
+                  <th colspan="6">Ingrasaminte aplicate</th>
+                  <th rowspan="3">Data aplicarii</th>
+                  <th rowspan="3">Total N <br />(kg s.a./ha)</th>
+                </tr>
+                <tr>
+                  <th colspan="3">Organice</th>
+                  <th colspan="3">Minerale</th>
+                </tr>
+                <tr>
+                  <th>nr.</th>
+                  <th>suprafata <br />(ha)</th>
+                  <th>Tip</th>
+                  <th>t/ha</th>
+                  <th>kg N <br />s.a./ha</th>
+                  <th>Tip</th>
+                  <th>kg/ha</th>
+                  <th>kg N <br />s.a./ha</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fertilizer of loadedFertilizers; let i = index" >
+                  <td>{{fertilizer.parcel.physicalBlock}}</td>
+                  <td>{{fertilizer.parcel.name}}</td>
+                  <td>{{fertilizer.parcel.surface}}</td>
+                  <td>{{fertilizer.parcel.cultureName}}</td>
+                  <td>{{fertilizer.planned}}</td>
+                  <ng-container *ngIf="fertilizer.fetilizerType == Organice; else mineralFertilizer">
+                    <td>{{fertilizer.type}}</td>
+                    <td>{{fertilizer.appliedWeightPerHa}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </ng-container>
+                  <ng-template #mineralFertilizer>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{fertilizer.type}}</td>
+                    <td>{{fertilizer.appliedWeightPerHa}}</td>
+                    <td>-</td>
+                  </ng-template>
+                  <td>{{fertilizer.formatedDate}}</td>
+                  <!-- Not sure that the Total N should be -->
+                  <td>-</td>
+                  <td>{{fertilizer.observations}}</td>
+                </tr>
+                <!-- <tr>
+                  <td>BF277</td>
+                  <td>T8/1</td>
+                  <td>9,48</td>
+                  <td>Grau</td>
+                  <td>100</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>Azotat de Amoniu</td>
+                  <td>158,0</td>
+                  <td>P 71,9</td>
+                  <td>09.03.2021</td>
+                  <td>71,9</td>
+                  <td>Lucrat de semanat</td>
+                </tr>
+                <tr>
+                  <td>BF277</td>
+                  <td>T8/1</td>
+                  <td>9,48</td>
+                  <td>Grau</td>
+                  <td>100</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>TSP</td>
+                  <td>211,0</td>
+                  <td>72,5</td>
+                  <td>09.03.2021</td>
+                  <td>72,5</td>
+                  <td>Lucrat de semanat</td>
+                </tr>
+                <tr>
+                  <td>BF250</td>
+                  <td>T10</td>
+                  <td>9,48</td>
+                  <td>Grau</td>
+                  <td>100</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>Azotat de Amoniu</td>
+                  <td>150,0</td>
+                  <td>-</td>
+                  <td>09.04.2021 16.04.2021</td>
+                  <td>-</td>
+                  <td>Lucrat de semanat</td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

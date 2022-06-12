@@ -32,6 +32,10 @@ import { AvailableFinancingComponent } from "./available-financing/available-fin
 import { FinancingProgramComponent } from "./available-financing/financing-program/financing-program.component";
 import { DataTablesModule } from "angular-datatables";
 import { MachineryComponent } from "./machinery/machinery.component";
+import { FinancingCriteriaComponent } from './financing-criteria/financing-criteria.component';
+import { RecordsComponent } from './records/records.component';
+import { FertilizersComponent } from './records/fertilizers/fertilizers.component';
+import { TreatmentsComponent } from './records/treatments/treatments.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +54,10 @@ import { MachineryComponent } from "./machinery/machinery.component";
     AvailableFinancingComponent,
     FinancingProgramComponent,
     MachineryComponent,
+    FinancingCriteriaComponent,
+    RecordsComponent,
+    FertilizersComponent,
+    TreatmentsComponent,
   ],
   imports: [
     CommonModule,
