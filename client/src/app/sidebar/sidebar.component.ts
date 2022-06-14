@@ -32,13 +32,20 @@ export const ROUTES: RouteInfo[] = [
   //   class: "active-pro",
   // },
   { path: "/farm", title: "Ferma Ta", icon: "pe-7s-sun", class: "" },
+  { path: "/machinery", title: "Utilaje", icon: "pe-7s-car", class: "" },
   {
     path: "/financing",
     title: "Programe Finantare",
     icon: "pe-7s-piggy",
     class: "",
   },
-  { path: "/machinery", title: "Utilaje", icon: "pe-7s-car", class: "" },
+  {
+    path: "/financing-criteria",
+    title: "Criterii Programe",
+    icon: "fa fa-check",
+    class: "",
+  },
+  { path: "/records", title: "Registre", icon: "fa fa-file-text-o", class: "" },
 ];
 
 @Component({
@@ -53,6 +60,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
+    
   }
   isMobileMenu() {
     if ($(window).width() > 991) {
