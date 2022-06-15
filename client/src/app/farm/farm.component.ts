@@ -97,7 +97,7 @@ export class FarmComponent implements OnInit, OnDestroy {
         this.onGetParcels();
       },
       (error) => {
-        console.log(error);
+        this.notificationService.showError(error.error.userMessage);
       }
     );
     this.modalRef.hide();
@@ -115,7 +115,7 @@ export class FarmComponent implements OnInit, OnDestroy {
           this.onGetParcels();
         },
         (error) => {
-          console.log(error);
+          this.notificationService.showError(error.error.userMessage);
         }
       );
     }

@@ -13,7 +13,11 @@ export class LoginComponent implements OnInit {
   @ViewChild("myPassword") myPass: any;
   type: string = "password";
 
-  constructor(private accountService: AccountService, private router: Router, private notificationService: NotificationsService) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private notificationService: NotificationsService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -21,10 +25,10 @@ export class LoginComponent implements OnInit {
     this.accountService.login(this.loginModel).subscribe(
       (respone) => {
         this.router.navigateByUrl("/dashboard");
-        this.notificationService.showSuccess("Bine te-ai logat!");
+        this.notificationService.showSuccess("Bine ai venit!");
       },
       (error) => {
-        console.log(error);
+        this.notificationService.showError(error.error.userMessage);
       }
     );
   }

@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl("/login");
       },
       (error) => {
-        console.log(error);
+        this.notificationService.showError(error.error.userMessage);
       }
     );
   }

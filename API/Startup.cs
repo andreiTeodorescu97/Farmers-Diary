@@ -1,3 +1,4 @@
+using API.Middleware;
 using Application.DTOs.MappingProfile;
 using Application.Farm.AppliedFertilizersRepository;
 using Application.Farm.ParcelsRepository;
@@ -75,6 +76,8 @@ namespace API
 
             app.UseDefaultFiles(); //use index.htmhl
             app.UseStaticFiles();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
