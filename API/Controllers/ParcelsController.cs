@@ -86,5 +86,12 @@ namespace API.Controllers
             var result = await _appliedFertilizersRepository.GetAppliedFertilizers(User.GetUserId());
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("print")]
+        public async Task<IActionResult> PrintFertilizersRegistry()
+        {
+            return await _appliedFertilizersRepository.PrintFertilizersRegistry(User.GetUserId());
+        }
     }
 }

@@ -39,6 +39,22 @@ export class RecordsComponent implements OnInit {
     this.onGetFertilizers();
   }
 
+  print()
+  {
+    this.fertilizerService.print().subscribe((data) => {
+      this.showFile(data);
+    });
+  }
+
+  showFile(data) {
+    var blob = new Blob([data], { type: 'application/pdf' });
+    var url = window.URL.createObjectURL(blob);
+    var pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
+      this.notificationService.showSuccess('Please disable your browser Pop-up blocker, try to open a new tab or open another browser (Edge or Chrome should work)!');
+    }
+  }
+  
   onGetParcels() {
     this.farmService.getParcels().subscribe((data) => {
       this.parcels = data;
