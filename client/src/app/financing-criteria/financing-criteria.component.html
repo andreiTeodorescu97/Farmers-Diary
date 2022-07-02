@@ -1,1 +1,8 @@
-<p>financing-criteria works!</p>
+<div class="main-content">
+    <app-financing-program
+    *ngFor="let program of programs"
+    [program] = program
+    [editableProgram] = true
+    ></app-financing-program>
+  </div>
+  

@@ -45,8 +45,7 @@
             placeholder="Selectati tipul ingrasamintelor"
             [(ngModel)]="registerFertilizer.fetilizerType"
           >
-            <option [value]="Organice">Organice</option>
-            <option [value]="Minerale">Minerale</option>
+            <option *ngFor="let fertilizerType of fertilizerTypes" [value]=fertilizerType>{{fertilizerType}}</option>
           </select>
         </div>
       </div>
@@ -66,7 +65,7 @@
       <div class="row col-md-12">
         <div class="form-group">
           <label
-            *ngIf="registerFertilizer.fetilizerType == Organice; else minerale"
+            *ngIf="registerFertilizer.fetilizerType == 'Organice'; else minerale"
             >t/ha</label
           >
           <ng-template #minerale>
@@ -137,84 +136,137 @@
     <form #registerForm="ngForm">
       <div class="row col-md-12">
         <div class="form-group">
-          <label>Bloc fizic</label>
-          <input
-            type="text"
-            class="form-control"
-            name="physicalBlock"
-            placeholder="Bloc fizic"
-            id="physicalBlock"
-            [(ngModel)]="registerParcel.physicalBlock"
-          />
-        </div>
-      </div>
-
-      <div class="row col-md-12">
-        <div class="form-group">
-          <label>Denumire parcela</label>
-          <input
-            type="text"
-            class="form-control"
-            name="parcel-name"
-            placeholder="Denumire parcela"
-            id="parcel-name"
-            [(ngModel)]="registerParcel.name"
-          />
-        </div>
-      </div>
-
-      <div class="row col-md-12">
-        <div class="form-group">
-          <label>Arie parcela (ha)</label>
-          <input
-            type="number"
-            class="form-control"
-            name="parcel-area"
-            placeholder="Suprafata in hectare"
-            id="parcel-area"
-            [(ngModel)]="registerParcel.surface"
-          />
-        </div>
-      </div>
-      <div class="row col-md-12">
-        <div class="form-group">
-          <label for="select-county">Cultura</label>
+          <label>Parcela</label>
           <select
             class="form-control"
-            name="select-culture"
-            id="select-culture"
-            aria-label="Selectati cultura"
-            placeholder="Selectati Cultura"
-            [(ngModel)]="+registerParcel.cultureId"
+            name="parcelId"
+            id="parcelId"
+            aria-label="Parcela"
+            placeholder="Parcela"
+            [(ngModel)]="registerFertilizer.parcelId"
           >
-            <option
-              *ngFor="let pickedCulture of loadedCultures"
-              [value]="pickedCulture.id"
-            >
-              {{ pickedCulture.name }}
+            <option *ngFor="let parcel of parcels" [value]="parcel.id">
+              {{ parcel.name }}
             </option>
           </select>
         </div>
       </div>
-
-      <div class="row col-md-12">
-        <div class="form-group">
-          <label for="select-county">Judet:</label>
-          <select
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Data incepere tratament</label>
+          <input
+            type="datetime-local"
             class="form-control"
-            name="select-county"
-            id="select-county"
-            [(ngModel)]="+registerParcel.countyId"
-          >
-            <option
-              *ngFor="let pickedCounty of loadedCounties"
-              [value]="pickedCounty.id"
-            >
-              {{ pickedCounty.name }}
-            </option>
-          </select>
+            name="dateApplied"
+            placeholder="ZZ/LL/AAAA"
+            id="dateApplied"
+            [(ngModel)]="registerFertilizer.treatmentStarted"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Data terminare tratament</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            name="dateApplied"
+            placeholder="ZZ/LL/AAAA"
+            id="dateApplied"
+            [(ngModel)]="registerFertilizer.treatmentEnded"
+          />
         </div>
       </div>
+      <div class="row  col-md-12">
+        <div class="form-group">
+          <label>Timpul aplicarii</label>
+          <input
+            type="text"
+            class="form-control"
+            name="type"
+            placeholder="Tip"
+            id="type"
+            [(ngModel)]="registerFertilizer.type"
+          />
+        </div>
+      </div>
+      <div class="row  col-md-12">
+        <div class="form-group">
+          <label>Agentul de daunare</label>
+          <input
+            type="text"
+            class="form-control"
+            name="type"
+            placeholder="Tip"
+            id="type"
+            [(ngModel)]="registerFertilizer.type"
+          />
+        </div>
+      </div>
+      <div class="row  col-md-12">
+        <div class="form-group">
+          <label>Denumire PPP folosita</label>
+          <input
+            type="text"
+            class="form-control"
+            name="type"
+            placeholder="Tip"
+            id="type"
+            [(ngModel)]="registerFertilizer.type"
+          />
+        </div>
+      </div>
+      <div class="row  col-md-12">
+        <div class="form-group">
+          <label>Cantitati utilizate</label>
+          <input
+            type="text"
+            class="form-control"
+            name="type"
+            placeholder="Tip"
+            id="type"
+            [(ngModel)]="registerFertilizer.type"
+          />
+        </div>
+      </div>
+      <div class="row  col-md-12">
+        <div class="form-group">
+          <label>Numele si prenumele persoanei responsabile de efectuarea tratamentului</label>
+          <input
+            type="text"
+            class="form-control"
+            name="type"
+            placeholder="Tip"
+            id="type"
+            [(ngModel)]="registerFertilizer.type"
+          />
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group">
+          <label>Data inceperii recoltarii produsului agricol</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            name="dateApplied"
+            placeholder="ZZ/LL/AAAA"
+            id="dateApplied"
+            [(ngModel)]="registerFertilizer.dateApplied"
+          />
+        </div>
+      </div>
+      <div class="row  col-md-12">
+        <div class="form-group">
+          <label>Nr. si data documentului prin care s-a dat in consum populatiei</label>
+          <input
+            type="text"
+            class="form-control"
+            name="type"
+            placeholder="Tip"
+            id="type"
+            [(ngModel)]="registerFertilizer.type"
+          />
+        </div>
+      </div>
+      
       <div class="form-group">
         <button
           class="btn btn-success btn-fill"
@@ -306,7 +358,7 @@
                 <td>11.04 - 21.04.2021</td>
                 <td>Porumb</td>
                 <td>Postmugurit</td>
-                <td>Buruieni si inca ceva</td>
+                <td>Buruieni</td>
                 <td>TSalvatov</td>
                 <td>1-1,5l/ha <br />1,49l/ha</td>
                 <td>136,79</td>
@@ -319,7 +371,7 @@
                 <td>11.04 - 21.04.2021</td>
                 <td>Porumb</td>
                 <td>Postmugurit</td>
-                <td>Buruieni si inca ceva</td>
+                <td>Buruieni</td>
                 <td>Teudeo</td>
                 <td>1-1,5l/ha <br />1-1,5l/ha</td>
                 <td>10</td>
@@ -332,7 +384,7 @@
                 <td>11.04 - 21.04.2021</td>
                 <td>Floarea soarelui</td>
                 <td>Postmugurit</td>
-                <td>Buruieni si inca ceva</td>
+                <td>Buruieni</td>
                 <td>Teudeo</td>
                 <td>1-1,5l/ha <br />3-4l/ha</td>
                 <td>136,5</td>
@@ -345,7 +397,7 @@
                 <td>11.04 - 21.04.2021</td>
                 <td>Grau</td>
                 <td>Postmugurit</td>
-                <td>Buruieni neocrotitesi inca ceva</td>
+                <td>Buruieni neocrotite</td>
                 <td>Listef</td>
                 <td>1-1,5l/ha <br />1,2l/ha</td>
                 <td>129,3</td>
@@ -428,54 +480,6 @@
                   <td>-</td>
                   <td>{{fertilizer.observations}}</td>
                 </tr>
-                <!-- <tr>
-                  <td>BF277</td>
-                  <td>T8/1</td>
-                  <td>9,48</td>
-                  <td>Grau</td>
-                  <td>100</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>Azotat de Amoniu</td>
-                  <td>158,0</td>
-                  <td>P 71,9</td>
-                  <td>09.03.2021</td>
-                  <td>71,9</td>
-                  <td>Lucrat de semanat</td>
-                </tr>
-                <tr>
-                  <td>BF277</td>
-                  <td>T8/1</td>
-                  <td>9,48</td>
-                  <td>Grau</td>
-                  <td>100</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>TSP</td>
-                  <td>211,0</td>
-                  <td>72,5</td>
-                  <td>09.03.2021</td>
-                  <td>72,5</td>
-                  <td>Lucrat de semanat</td>
-                </tr>
-                <tr>
-                  <td>BF250</td>
-                  <td>T10</td>
-                  <td>9,48</td>
-                  <td>Grau</td>
-                  <td>100</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>Azotat de Amoniu</td>
-                  <td>150,0</td>
-                  <td>-</td>
-                  <td>09.04.2021 16.04.2021</td>
-                  <td>-</td>
-                  <td>Lucrat de semanat</td>
-                </tr> -->
               </tbody>
             </table>
           </div>
