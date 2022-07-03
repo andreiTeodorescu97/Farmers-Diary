@@ -4,21 +4,510 @@
       <div class="card">
         <div class="header">
           <p class="category">Programul {{ program.id }}</p>
-          <h4 class="measure-title title">{{ program.name }}</h4>
+          <h5 class="measure-title title">{{ program.name }}</h5>
+          <hr />
+          <h4 class="criteria-description text-left">
+            <strong>Descriere</strong>
+          </h4>
+          <p style="white-space: pre-line">
+            {{ program.description }}
+          </p>
           <hr />
           <p class="criteria-title text-left">Criterii:</p>
           <ul class="criteria-items text-left">
-            <li *ngFor="let criteria of program.criteria">
-              {{ criteria.id }} - {{ criteria.name }} : {{ criteria.amount }}
+            <li
+              *ngFor="let criteria of program.criteria"
+              class="measures-details"
+            >
+              {{ criteria.name }} :
+              <div [ngSwitch]="criteria.category" class="criteria-amount">
+                <div *ngSwitchCase="'Dimensiune'">
+                  De la {{ criteria.minAmount }} pana la
+                  {{ criteria.maxAmount }} Ha
+                </div>
+                <div *ngSwitchCase="'Animale'">{{ criteria.type }}</div>
+                <div *ngSwitchCase="'Cultura'">{{ criteria.type }}</div>
+                <div *ngSwitchCase="'Ingrasaminte'">{{ criteria.type }}</div>
+                <div *ngSwitchCase="'Zona'">{{ criteria.type }}</div>
+                <div *ngSwitchDefault>Nu e nimic atasat</div>
+              </div>
+              <strong>{{ criteria.points }} p</strong>
             </li>
           </ul>
-          <div class="text-right">
-            <div class="pe-7s-angle-down-circle"></div>
-            Mai multe detalii
+          <hr>
+
+
+          <div *ngIf="!editableProgram; else elseBlock">
+            <div>
+              Puncte totale: <strong>{{program.currentPointsForProgram}}P</strong> / <strong>{{maxPoints}}P</strong>
+            </div>
+            <div class="text-right">
+              <div class="pe-7s-angle-down-circle"></div>
+              Mai multe detalii
+            </div>
+           
           </div>
+
+          <ng-template #elseBlock>
+            <div>
+              Puncte maxime program: <strong>{{maxPoints}}P</strong>
+            </div>
+            <div class="text-right">
+              <button
+                class="btn btn-primary btn-fill"
+                type="button"
+                style="margin-right: 5px"
+                (click)="addCriteriaModal(editProgramTemplate)"
+              >
+                Editeaza
+              </button>
+            </div>
+          </ng-template>
           <br />
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #editProgramTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ program.name }}</h4>
+  </div>
+  <div class="modal-body">
+    <h5 class="text-center">Criterii</h5>
+    <div *ngFor="let criteria of program.criteria">
+      <div class="change-btns">
+        <div>
+          {{ criteria.name }}
+        </div>
+
+        <div>
+          <button
+            class="btn btn-primary btn-fill"
+            type="button"
+            style="margin-right: 5px"
+            (click)="editSingleCriteriaModal(editCriteriaTemplate)"
+          >
+            Modifica
+          </button>
+          <button
+            class="btn btn-danger btn-fill"
+            type="button"
+            style="margin-right: 5px"
+          >
+            <div class="pe-7s-trash"></div>
+          </button>
+        </div>
+      </div>
+      <br />
+    </div>
+    <div class="text-center">
+      <button
+        class="btn btn-success btn-fill text-center"
+        type="button"
+        style="margin-right: 5px"
+        (click)="addSingleCriteriaModal(addCriteriaTemplate)"
+      >
+        Adauga criteriu
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #editCriteriaTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Editeaza Criteriul</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>ID criteriu</label>
+      <input
+        type="number"
+        class="form-control"
+        name="criteria-id"
+        placeholder="0"
+        id="criteria-id"
+        [(ngModel)]="newCriteria.id"
+        value="{{program.id}}"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Denumire criteriu</label>
+      <input
+        type="text"
+        class="form-control"
+        name="criteria-name"
+        placeholder="Criteriu X"
+        id="criteria-name"
+        [(ngModel)]="newCriteria.name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="select-criteria-type">Categorie</label>
+      <select
+        class="form-control"
+        name="select-criteria-type"
+        id="select-criteria-type"
+        aria-label="Selectati tipul de informatii necesare"
+        placeholder="Selectati tipul de informatii necesare"
+        [(ngModel)]="newCriteria.category"
+      >
+        <option
+          *ngFor="let criteriaCategory of criteriaCategories"
+          [value]="criteriaCategory"
+        >
+          {{ criteriaCategory }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="newCriteria.category">
+      <div class="form-group">
+        <div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault1"
+              id="flexRadioDefault1"
+              checked
+              [value]="true"
+              [(ngModel)]="newCriteria.needsType"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Necesita tip
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault1"
+              id="flexRadioDefault2"
+              [value]="false"
+              [(ngModel)]="newCriteria.needsType"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Nu necesita tip
+            </label>
+          </div>
+        </div>
+        <label>Tip {{ newCriteria.category }}</label>
+        <input
+          type="text"
+          class="form-control"
+          name="needed-type"
+          placeholder="Suprafata in hectare"
+          id="needed-type"
+          [disabled]="!newCriteria.needsType"
+          [(ngModel)]="newCriteria.type"
+        />
+      </div>
+    </div>
+
+    <div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault3"
+          id="flexRadioDefault3"
+          [value]="true"
+          [(ngModel)]="newCriteria.needsQuantity"
+        />
+        <label class="form-check-label" for="flexRadioDefault3">
+          Necesita cantitate
+        </label>
+        <!-- <div *ngIf="newCriteria.needsQuantity" >
+          <div class="form-check">
+            <input
+              class="form-check-input inside-checkbox"
+              type="radio"
+              name="flexRadioDefault5"
+              id="flexRadioDefault5"
+              [value]="true"
+            />
+            <label class="form-check-label" for="flexRadioDefault5">
+              Valoare
+            </label>
+            <div class="form-check">
+              <input
+                class="form-check-input inside-checkbox"
+                type="radio"
+                name="flexRadioDefault5"
+                id="flexRadioDefault6"
+                [value]="true"
+              />
+              <label class="form-check-label" for="flexRadioDefault6">
+                Interval
+              </label>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault3"
+          id="flexRadioDefault4"
+          checked
+          [value]="false"
+          [(ngModel)]="newCriteria.needsQuantity"
+        />
+        <label class="form-check-label" for="flexRadioDefault4">
+          Nu necesita cantitate
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Minim</label>
+      <input
+        type="text"
+        class="form-control"
+        name="minimum-value"
+        placeholder="0"
+        id="minimum-value"
+        [disabled]="!newCriteria.needsQuantity"
+        [(ngModel)]="newCriteria.minAmount"
+      />
+    </div>
+    <div class="form-group">
+      <label>Maxim</label>
+      <input
+        type="text"
+        class="form-control"
+        name="maximum-value"
+        placeholder="999999"
+        id="maximum-value"
+        [disabled]="!newCriteria.needsQuantity"
+        [(ngModel)]="newCriteria.maxAmount"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Punctaj</label>
+      <input
+        type="number"
+        class="form-control"
+        name="criteria-points"
+        placeholder="0"
+        id="criteria-points"
+        [(ngModel)]="newCriteria.points"
+      />
+    </div>
+
+    <div class="text-center">
+      <button
+        class="btn btn-primary btn-fill"
+        type="button"
+        style="margin-right: 5px"
+        (click)="addCriteria()"
+      >
+        Adauga
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addCriteriaTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Adauga Criteriu</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>ID criteriu</label>
+      <input
+        type="number"
+        class="form-control"
+        name="criteria-id"
+        placeholder="0"
+        id="criteria-id"
+        [(ngModel)]="newCriteria.id"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Denumire criteriu</label>
+      <input
+        type="text"
+        class="form-control"
+        name="criteria-name"
+        placeholder="Criteriu X"
+        id="criteria-name"
+        [(ngModel)]="newCriteria.name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="select-criteria-type">Categorie</label>
+      <select
+        class="form-control"
+        name="select-criteria-type"
+        id="select-criteria-type"
+        aria-label="Selectati tipul de informatii necesare"
+        placeholder="Selectati tipul de informatii necesare"
+        [(ngModel)]="newCriteria.category"
+      >
+        <option
+          *ngFor="let criteriaCategory of criteriaCategories"
+          [value]="criteriaCategory"
+        >
+          {{ criteriaCategory }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="newCriteria.category">
+      <div class="form-group">
+        <div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault1"
+              id="flexRadioDefault1"
+              checked
+              [value]="true"
+              [(ngModel)]="newCriteria.needsType"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Necesita tip
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault1"
+              id="flexRadioDefault2"
+              [value]="false"
+              [(ngModel)]="newCriteria.needsType"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Nu necesita tip
+            </label>
+          </div>
+        </div>
+        <label>Tip {{ newCriteria.category }}</label>
+        <input
+          type="text"
+          class="form-control"
+          name="needed-type"
+          placeholder="Suprafata in hectare"
+          id="needed-type"
+          [disabled]="!newCriteria.needsType"
+          [(ngModel)]="newCriteria.type"
+        />
+      </div>
+    </div>
+
+    <div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault3"
+          id="flexRadioDefault3"
+          [value]="true"
+          [(ngModel)]="newCriteria.needsQuantity"
+        />
+        <label class="form-check-label" for="flexRadioDefault3">
+          Necesita cantitate
+        </label>
+        <!-- <div *ngIf="newCriteria.needsQuantity" >
+          <div class="form-check">
+            <input
+              class="form-check-input inside-checkbox"
+              type="radio"
+              name="flexRadioDefault5"
+              id="flexRadioDefault5"
+              [value]="true"
+            />
+            <label class="form-check-label" for="flexRadioDefault5">
+              Valoare
+            </label>
+            <div class="form-check">
+              <input
+                class="form-check-input inside-checkbox"
+                type="radio"
+                name="flexRadioDefault5"
+                id="flexRadioDefault6"
+                [value]="true"
+              />
+              <label class="form-check-label" for="flexRadioDefault6">
+                Interval
+              </label>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault3"
+          id="flexRadioDefault4"
+          checked
+          [value]="false"
+          [(ngModel)]="newCriteria.needsQuantity"
+        />
+        <label class="form-check-label" for="flexRadioDefault4">
+          Nu necesita cantitate
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Minim</label>
+      <input
+        type="text"
+        class="form-control"
+        name="minimum-value"
+        placeholder="0"
+        id="minimum-value"
+        [disabled]="!newCriteria.needsQuantity"
+        [(ngModel)]="newCriteria.minAmount"
+      />
+    </div>
+    <div class="form-group">
+      <label>Maxim</label>
+      <input
+        type="text"
+        class="form-control"
+        name="maximum-value"
+        placeholder="999999"
+        id="maximum-value"
+        [disabled]="!newCriteria.needsQuantity"
+        [(ngModel)]="newCriteria.maxAmount"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Punctaj</label>
+      <input
+        type="number"
+        class="form-control"
+        name="criteria-points"
+        placeholder="0"
+        id="criteria-points"
+        [(ngModel)]="newCriteria.points"
+      />
+    </div>
+
+    <div class="text-center">
+      <button
+        class="btn btn-primary btn-fill"
+        type="button"
+        style="margin-right: 5px"
+        (click)="addCriteria()"
+      >
+        Adauga
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   login() {
     this.accountService.login(this.loginModel).subscribe(
       (respone) => {
-        this.router.navigateByUrl("/dashboard");
-        this.notificationService.showSuccess("Bine ai venit!");
+        this.router.navigateByUrl("/farm");
+        this.notificationService.showSuccess("Bine te-ai logat!");
       },
       (error) => {
         this.notificationService.showError(error.error.userMessage);

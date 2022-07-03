@@ -21,6 +21,7 @@ export class RecordsComponent implements OnInit {
   registerFertilizer = {} as IAddFertilizerRegistry;
   loadedFertilizers: Array<IFertilizerRegistry> = [];
   parcels: Array<Parcel> = [];
+  fertilizerTypes = ['Organice', 'Minerale']; 
 
   @ViewChild(DataTableDirective, { static: false })
   dtElement: DataTableDirective;
@@ -83,6 +84,7 @@ export class RecordsComponent implements OnInit {
           console.log(error);
         }
       );
+      this.modalRef.hide();
   }
 
   onGetFertilizers() {

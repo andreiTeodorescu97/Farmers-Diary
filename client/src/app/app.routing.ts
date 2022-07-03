@@ -28,7 +28,6 @@ const routes: Routes = [
     runGuardsAndResolvers: "always",
     canActivate: [IsAuthenticated],
     children: [
-      { path: "dashboard", component: HomeComponent },
       { path: "user", component: UserComponent },
       { path: "table", component: TablesComponent },
       { path: "typography", component: TypographyComponent },

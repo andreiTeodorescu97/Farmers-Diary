@@ -10,3 +10,21 @@
 .criteria-items {
   font-weight: 200;
 }
+
+.change-btns{
+  display: flex;
+  justify-content: space-between;
+}
+
+.inside-checkbox{
+  margin-left: 30px;
+}
+
+.measures-details{
+  display: flex;
+}
+
+.criteria-amount{
+  margin-left: 10px;
+  margin-right: 10px;
+}
